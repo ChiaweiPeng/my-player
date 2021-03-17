@@ -3422,10 +3422,10 @@ electron-builder@^20.19.2:
     update-notifier "^3.0.0"
     yargs "^13.2.4"
 
-electron-debug@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.npm.taobao.org/electron-debug/download/electron-debug-1.5.0.tgz#d88c02146efb7fc5ae1b21eac56fbe4987eae50c"
-  integrity sha1-2IwCFG77f8WuGyHqxW++SYfq5Qw=
+electron-debug@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npm.taobao.org/electron-debug/download/electron-debug-1.4.0.tgz#bec7005522220a9d0622153352e1bbff0f37af2e"
+  integrity sha1-vscAVSIiCp0GIhUzUuG7/w83ry4=
   dependencies:
     electron-is-dev "^0.3.0"
     electron-localshortcut "^3.0.0"

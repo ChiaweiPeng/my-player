@@ -43,7 +43,10 @@ let mainConfig = {
   resolve: {
     extensions: ['.js', '.json', '.node']
   },
-  target: 'electron-main'
+  target: 'electron-main',
+  externals: {
+    express: 'express'
+  }
 }
 
 /**
