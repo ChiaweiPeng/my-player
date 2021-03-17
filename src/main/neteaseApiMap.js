@@ -4,11 +4,8 @@ const { cookieToJson } = require('NeteaseCloudMusicApi/util/index')
 // 网易api接口匹配
 const artist_list = require('NeteaseCloudMusicApi/module/artist_list')
 
-// qq音乐api接口匹配
-// const
-
 module.exports = {
-  '/artist_list': generatorFn(artist_list)
+  '/api/artist_list': generatorFn(artist_list)
 }
 
 function generatorFn (module) {

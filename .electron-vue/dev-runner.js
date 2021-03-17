@@ -9,8 +9,6 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 
-// const musicApi = require('music-api-for-qq')
-
 const mainConfig = require('./webpack.main.config')
 const rendererConfig = require('./webpack.renderer.config')
 
@@ -71,7 +69,6 @@ function startRenderer () {
           ctx.middleware.waitUntilValid(() => {
             resolve()
           })
-          // app.use('/music',musicApi.router('/api'))
         }
       }
     )

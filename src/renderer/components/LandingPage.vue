@@ -26,10 +26,10 @@
         </div>
       </div>
     </main>
-    <a href="http://127.0.0.1:5001/qq-api/api/search_by_key?key=周杰伦">click to your qq-music-api</a> <br/>
-    <a href="http://127.0.0.1:5001/artist_list">click to netease-api-server</a> <br/>
-    <a href="http://127.0.0.1:5001/qq-api/api/singer_list">click to qq-api-server</a> <br/>
-    <a href="http://127.0.0.1:5001/music/api/search_by_key?key=周杰伦">click to neizhi </a>
+    <a href="http://127.0.0.1:6001/qq-api/api/search_by_key?key=周杰伦">click to your qq-music-api</a> <br/>
+    <a href="http://127.0.0.1:6001/api/artist_list">click to netease-api-server</a> <br/>
+    <a href="http://127.0.0.1:6001/qq-api/api/singer_list">click to qq-api-server</a> <br/>
+    <a href="http://127.0.0.1:6001/music/api/search_by_key?key=周杰伦">click to neizhi </a>
   </div>
 </template>
 

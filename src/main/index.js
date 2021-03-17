@@ -2,10 +2,7 @@
 
 import { app, BrowserWindow } from 'electron'
 import Express from 'express'
-import { startNetApiServer } from './neteaseApiServer'
-import { startQQMusicApiServer } from './qqmusicApiServer'
-import { startApiServer } from './app'
-
+import { startApiServer } from './apiServer'
 
 /**
  * Set `__static` path to static files in production
@@ -49,10 +46,7 @@ function createWindow () {
 }
 
 app.on('ready', async () => {
-  // startApiServer()
-  startNetApiServer()
-  // startQQMusicApiServer()
-  // createServer()
+  startApiServer()
   await createWindow()
 })
 
@@ -71,16 +65,6 @@ app.on('activate', () => {
 app.on('quit', () => {
   _app && _app.close()
 })
-
-// function createServer () {
-//   const app = new Express()
-//   // apiserver()
-//   app.use('/', Express.static(__dirname + '/'))
-//   _app = app.listen(5002, '', () => {
-//     console.log('app run in port 5002')
-//   })
-// }
-
 /**
  * Auto Updater
  *
