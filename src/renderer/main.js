@@ -10,7 +10,7 @@ Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 // 去除chrome控制台报错
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 /* eslint-disable no-new */
 new Vue({

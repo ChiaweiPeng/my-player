@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser')
 
 // 引入netease和qq-music Api
 const netApiMap = require('./neteaseApiMap')
-const musicApi = require('music-api-for-qq')
+const musicApi = require('mymusic-api-for-qq')
 
 export const startApiServer = () => {
   const app = express()
@@ -38,8 +38,8 @@ export const startApiServer = () => {
   app.use('/qq-api', musicApi.router('/api'))
 
   // 配置端口，主机号
-  const port = 6001
-  const host = '127.0.0.1'
+  const port = process.env.API_PORT || 6001
+  const host = process.env.HOST || '127.0.0.1'
 
   // 创建server
   app.server = app.listen(port, host, () => {

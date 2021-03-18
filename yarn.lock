@@ -6389,22 +6389,6 @@ multispinner@^0.2.1:
     lodash.merge "^3.3.2"
     log-update "^1.0.2"
 
-music-api-for-qq@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.npm.taobao.org/music-api-for-qq/download/music-api-for-qq-0.0.5.tgz#2b76be466c99234b55e7d0fa05ab601a46b6e579"
-  integrity sha1-K3a+RmyZI0tV59D6BatgGka25Xk=
-  dependencies:
-    apicache "^1.2.1"
-    axios "^0.18.0"
-    body-parser "^1.18.3"
-    child_process "^1.0.2"
-    colors "^1.3.3"
-    compression "^1.7.3"
-    dot-prop "^4.2.0"
-    express "^4.16.2"
-    ip "^1.1.5"
-    js-base64 "^2.4.3"
-
 music-metadata@^7.5.3:
   version "7.8.1"
   resolved "https://registry.npm.taobao.org/music-metadata/download/music-metadata-7.8.1.tgz#09d493b1b370c8313489a10786e75fe5e83e09de"
@@ -6421,6 +6405,22 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.npm.taobao.org/mute-stream/download/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
   integrity sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=
+
+mymusic-api-for-qq@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/mymusic-api-for-qq/-/mymusic-api-for-qq-0.0.4.tgz#c1adf2d4ca9a06f9e18443500fd5e3967d40b939"
+  integrity sha512-0UrpD7q5QKbm0Woc9yvY1+WIz59KIDqE+lkciBMKSZ3qx1fTYRmf3F0+Yg/Pts5f6RGyaeJ5DjXqKCfFw37XtA==
+  dependencies:
+    apicache "^1.2.1"
+    axios "^0.18.0"
+    body-parser "^1.18.3"
+    child_process "^1.0.2"
+    colors "^1.3.3"
+    compression "^1.7.3"
+    dot-prop "^4.2.0"
+    express "^4.16.2"
+    ip "^1.1.5"
+    js-base64 "^2.4.3"
 
 nan@^2.12.1, nan@^2.13.2:
   version "2.14.2"
