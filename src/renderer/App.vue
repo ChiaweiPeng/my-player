@@ -5,11 +5,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'my-player'
-  }
+export default {
+  name: 'my-player'
+}
 </script>
 
 <style>
-  /* CSS */
+/* CSS */
 </style>

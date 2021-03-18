@@ -24,5 +24,11 @@
       ]
     }
   },
-  "plugins": ["transform-runtime","transform-es2015-modules-commonjs","syntax-dynamic-import"]
+  "plugins": [
+    "transform-runtime",
+    "transform-es2015-modules-commonjs",
+    "syntax-dynamic-import"
+    //按需加载antd
+    // ["import",{"libraryName": "ant-design-vue", "libraryDirectory": "es", "style": "css"}]
+  ]
 }

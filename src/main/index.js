@@ -1,7 +1,6 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
-import Express from 'express'
 import { startApiServer } from './apiServer'
 
 /**
@@ -29,6 +28,9 @@ function createWindow () {
   })
 
   mainWindow.loadURL(winURL)
+
+  // 隐藏顶部菜单
+  mainWindow.setMenu(null)
 
   // Open dev tools initially when in development mode
   if (process.env.NODE_ENV === 'development') {

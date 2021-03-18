@@ -53,6 +53,7 @@
     }
   },
   "dependencies": {
+    "ant-design-vue": "^1.7.4",
     "axios": "^0.18.0",
     "cookie-parser": "^1.4.5",
     "vue": "^2.5.16",
@@ -68,6 +69,7 @@
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
     "babel-minify-webpack-plugin": "^0.3.1",
+    "babel-plugin-import": "^1.13.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
