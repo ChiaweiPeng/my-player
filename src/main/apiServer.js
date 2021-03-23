@@ -30,11 +30,13 @@ export const startApiServer = () => {
   app.use(cookieParser())
 
   // netease 路由匹配
+  //http://127.0.0.1:6001/api/artist-list
   Object.entries(netApiMap).map(([k, v]) => {
     app.use(k, v)
   })
 
   // qq-music 路由匹配
+  //http://127.0.0.1:6001/qq-api/api/singer_list
   app.use('/qq-api', musicApi.router('/api'))
 
   // 配置端口，主机号

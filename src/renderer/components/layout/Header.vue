@@ -43,6 +43,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/global";
+@import "@/scss/common";
 .ant-layout-header {
   padding: 0 24px;
   background-color: #fff;

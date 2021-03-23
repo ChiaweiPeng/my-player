@@ -105,6 +105,7 @@ export default {
 
 <style scoped lang="scss">
 @import "@/scss/global";
+@import "@/scss/common";
 .ant-menu {
   border-right: none;
   .ant-btn {
@@ -122,6 +123,7 @@ export default {
     justify-content: space-between;
     .ant-btn.sign{
         margin-top: 4px;
+        margin-left: 2px;
     }
   }
 

@@ -7,12 +7,8 @@ html, body, div, span, header, footer, section, article, a, img {
 // 全局颜色
 $theme-color : #1890ff;
 $theme-lighten-color : #e6f7ff;
+$main-text-color:rgba(0, 0, 0, 0.87);
 
 // 侧边栏颜色
 $slider-title-fontcolor:rgba(0, 0, 0, 0.6);
-$slider-item-fontcolor:rgba(0, 0, 0, 0.87);
-
-@mixin theme--light-app {
-    background: #fff;
-    color:rgba(0, 0, 0, 0.87) ;
-}
+$slider-item-fontcolor:$main-text-color;
