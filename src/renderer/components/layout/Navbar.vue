@@ -1,88 +1,81 @@
 <template>
-  <a-menu :default-selected="['1']" theme="light">
-    <a-menu-item class="layout-tab" disabled style="cursor: initial" title="Back Forward Fresh">
-      <div class="btn-tab">
-        <a-button shape="circle" size="small">
-          <my-icon type="icon-calendar-arrow-left" />
-        </a-button>
-        <a-button shape="circle" size="small">
-          <my-icon type="icon-calendar-arrow-right" />
-        </a-button>
-        <a-button shape="circle" size="small">
-          <my-icon type="icon-reload" style="fontsize: 1rem; fontwight: 700" />
-        </a-button>
-      </div>
-    </a-menu-item>
-
-    <a-menu-item class="sign-in" disabled style="cursor: initial" title="signin setting mode">
-      <a-button
-        class="sign"
-        type="link"
-        style="padding: 0"
-        @click="handleSignIn"
+  <a-layout-sider :trigger="null" collapsible v-model="collapsed" >
+    <a-menu :selected-keys="[current]" theme="light">
+      <a-menu-item
+        class="layout-tab"
+        disabled
+        style="cursor: initial"
+        title="Back Forward Fresh"
       >
-        <my-icon type="icon-login-settings" style="marginright: 3px"></my-icon>
-        <span>sign-in</span>
-      </a-button>
+        <div class="btn-tab">
+          <a-button shape="circle" size="small">
+            <my-icon type="icon-calendar-arrow-left" />
+          </a-button>
+          <a-button shape="circle" size="small">
+            <my-icon type="icon-calendar-arrow-right" />
+          </a-button>
+          <a-button shape="circle" size="small">
+            <my-icon
+              type="icon-reload"
+              style="fontsize: 1rem; fontwight: 700"
+            />
+          </a-button>
+        </div>
+      </a-menu-item>
 
-      <div class="setting">
-        <a-button shape="circle" size="small" title="setting">
-          <my-icon type="icon-setting-Fill"></my-icon>
-        </a-button>
-
+      <a-menu-item
+        class="sign-in"
+        disabled
+        style="cursor: initial"
+        title="signin setting mode"
+      >
         <a-button
-          shape="circle"
-          size="small"
-          @click="handleTabNight"
-          title="tabDayMode"
+          class="sign"
+          type="link"
+          style="padding: 0"
+          @click="handleSignIn"
         >
-          <my-icon type="icon-yejian" v-if="!isNight"></my-icon>
-          <my-icon type="icon-taiyang1" v-else></my-icon>
+          <my-icon
+            type="icon-login-settings"
+            style="marginright: 3px"
+          ></my-icon>
+          <span>sign-in</span>
         </a-button>
-      </div>
-    </a-menu-item>
 
-    <a-menu-item-group key="1">
-      <span slot="title">MUSIC</span>
-      <a-menu-item key="1">
-        <my-icon class="icon" type="icon-node"></my-icon>
-        <span class="item-name">Discover music</span>
+        <div class="setting">
+          <a-button shape="circle" size="small" title="setting">
+            <my-icon type="icon-setting-Fill"></my-icon>
+          </a-button>
+
+          <a-button
+            shape="circle"
+            size="small"
+            @click="handleTabNight"
+            title="tabDayMode"
+          >
+            <my-icon type="icon-yejian" v-if="!isNight"></my-icon>
+            <my-icon type="icon-taiyang1" v-else></my-icon>
+          </a-button>
+        </div>
       </a-menu-item>
 
-      <a-menu-item key="2">
-        <my-icon class="icon" type="icon-song-circle"></my-icon>
-        <span class="item-name">Explore</span>
-      </a-menu-item>
+      <a-menu-item-group key="g1">
+        <span slot="title">{{defaultNav1.nav_title}}</span>
+        <a-menu-item v-for="(item,key) of defaultNav1.nav_item" :key="key" @click="handleTabContent(key,item.to)">
+          <my-icon class="icon" :type="item.icon" />
+          <span class="item-name">{{item.name}}</span>
+        </a-menu-item>
+      </a-menu-item-group>
 
-      <a-menu-item key="3">
-        <my-icon class="icon" type="icon-music-node"></my-icon>
-        <span class="item-name">Private FM</span>
-      </a-menu-item>
-
-      <a-menu-item key="4">
-        <my-icon class="icon" type="icon-earphone"></my-icon>
-        <span class="item-name">Daily Recommend</span>
-      </a-menu-item>
-    </a-menu-item-group>
-
-    <a-menu-item-group key="g2">
-      <span slot="title">LIBRARY</span>
-      <a-menu-item key="5">
-        <my-icon class="icon" type="icon-ipod"></my-icon>
-        <span class="item-name">My Collection</span>
-      </a-menu-item>
-
-      <a-menu-item key="6">
-        <my-icon class="icon" type="icon-cdsvg"></my-icon>
-        <span class="item-name">My Cloud Disk</span>
-      </a-menu-item>
-
-      <a-menu-item key="7">
-        <my-icon class="icon" type="icon-radio"></my-icon>
-        <span class="item-name">My Radio</span>
-      </a-menu-item>
-    </a-menu-item-group>
-  </a-menu>
+      <a-menu-item-group key="g2">
+        <span slot="title">{{defaultNav2.nav_title}}</span>
+        <a-menu-item v-for="item of defaultNav2.nav_item" :key="item.key" @click="handleTabContent(item.key,item.to)">
+          <my-icon class="icon" :type="item.icon" />
+          <span class="item-name">{{item.name}}</span>
+        </a-menu-item>
+      </a-menu-item-group>
+    </a-menu>
+  </a-layout-sider>
 </template>
 
 <script>
@@ -90,7 +83,28 @@ export default {
   name: "DefaultNavbar",
   data: () => ({
     isNight: false,
+    current: 0,
+    defaultNav1:{
+      nav_title:'MUSIC',
+      nav_item:[
+        {name:'Discover music',val:'dicover',to:'/discover',icon:'icon-node'},
+        {name:'Explore',val:'explore',to:'/explore',icon:'icon-song-circle'},
+        {name:'Private FM',val:'fm',to:'/fm',icon:'icon-music-node'},
+        {name:'Daily Recommend',val:'recommend',to:'/recommend',icon:'icon-earphone'}
+      ]
+    },
+    defaultNav2:{
+      nav_title:'LIBRARY',
+      nav_item:[
+        {key:'4',name:'My Collection',val:'collection',to:'/my-collection',icon:'icon-ipod'},
+        {key:'5',name:'My Cloud Disk', val:'disk',to:'/cloud-disk',icon:'icon-cdsvg'},
+        {key:'6',name:'My Radio',val:'radio',to:'/my-radio',icon:'icon-radio'}
+      ]
+    }
   }),
+  props:{
+    collapsed:Boolean
+  },
   components: {},
   methods: {
     handleTabNight(e) {
@@ -98,6 +112,11 @@ export default {
     },
     handleSignIn(e) {
       console.log("sign-in");
+    },
+    handleTabContent(key,link) {
+      // console.log(key, link);
+      this.current = key;
+      this.$router.push(link);
     },
   },
 };
@@ -121,9 +140,9 @@ export default {
     margin-bottom: 0;
     display: flex;
     justify-content: space-between;
-    .ant-btn.sign{
-        margin-top: 4px;
-        margin-left: 2px;
+    .ant-btn.sign {
+      margin-top: 4px;
+      margin-left: 2px;
     }
   }
 
@@ -157,12 +176,13 @@ export default {
   }
 }
 
-.ant-menu-inline-collapsed{
-    .layout-tab,.sign-in{
-        padding: 0 !important;
-    }
-    .ant-menu-item .anticon{
-        line-height: 0;
-    }
+.ant-menu-inline-collapsed {
+  .layout-tab,
+  .sign-in {
+    padding: 0 !important;
+  }
+  .ant-menu-item .anticon {
+    line-height: 0;
+  }
 }
 </style>

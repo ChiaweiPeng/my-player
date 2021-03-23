@@ -13,12 +13,14 @@
     line-height: 2rem;
     letter-spacing: 0.0125em !important;
     font-family: "Roboto", sans-serif !important;
+    margin-bottom: 0.6rem;
 }
 
 @mixin content-text-h8 {
-    font-size: 0.25rem;
+    font-size: .9rem;
     font-weight: 700;
-    color: #ddd;
+    color: #bdbdbd;
+    margin-bottom: 0;
 }
 
 // hover效果盒
@@ -53,6 +55,44 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+// 卡片btn-area 底部双button
+@mixin box-btn-area1 {
+    position: relative;
+      @include hover-box;
+      &:hover {
+        .btn-area > button {
+          display: flex;
+        }
+      }
+
+      .btn-area {
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        button {
+          @include box-btn;
+        }
+      }
+}
+
+// 卡片btn-area 中间播放按钮
+@mixin box-btn-area2 {
+    @include hover-box;
+    position: relative;
+    &:hover > button {
+        display: flex;
+    }
+    button {
+        @include box-btn;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 // 卡片btn
