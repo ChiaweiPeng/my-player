@@ -30,67 +30,16 @@
           <div class="title">Recommend Music Video</div>
           <a-row>
             <a-col :span="12">
-              <div
-                class="recom-img"
-                :style="`background-image: url('${recm.picUrl}')`"
-              >
-                <a-button shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-              </div>
-              <div class="recom-info">
-                <p class="recom-title">{{ recm.title }}</p>
-                <span class="recom-artist">{{ recm.artist }} ·</span>
-                <span class="recom-num">{{ recm.num }} Views</span>
-              </div>
+              <video-cover :video="video" />
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="recom-img"
-                :style="`background-image: url('${recm.picUrl}')`"
-              >
-                <a-button shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-              </div>
-              <div class="recom-info">
-                <p class="recom-title">{{ recm.title }}</p>
-                <span class="recom-artist">{{ recm.artist }} ·</span>
-                <span class="recom-num">{{ recm.num }} Views</span>
-              </div>
+              <video-cover :video="video" />
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="recom-img"
-                :style="`background-image: url('${recm.picUrl}')`"
-              >
-                <a-button shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-              </div>
-              <div class="recom-info">
-                <p class="recom-title">{{ recm.title }}</p>
-                <span class="recom-artist">{{ recm.artist }} ·</span>
-                <span class="recom-num">{{ recm.num }} Views</span>
-              </div>
+              <video-cover :video="video" />
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="recom-img"
-                :style="`background-image: url('${recm.picUrl}')`"
-              >
-                <a-button shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-              </div>
-              <div class="recom-info">
-                <p class="recom-title">{{ recm.title }}</p>
-                <span class="recom-artist">{{ recm.artist }} ·</span>
-                <span class="recom-num">{{ recm.num }} Views</span>
-              </div>
+              <video-cover :video="video" />
             </a-col>
           </a-row>
         </div>
@@ -101,123 +50,28 @@
           <div class="title">Hot albums</div>
           <a-row>
             <a-col :span="12">
-              <div
-                class="albums-img"
-                :style="`background-image: url('${albums.picUrl}')`"
-              >
-                <div class="btn-area">
-                  <a-button class="al-play" shape="circle"
-                    ><my-icon type="icon-bofang"></my-icon
-                  ></a-button>
-                  <a-button class="al-content" shape="circle"
-                    ><my-icon type="icon-shenglve"></my-icon
-                  ></a-button>
-                </div>
-              </div>
-              <div class="albums-info">
-                <p class="albums-title">{{ albums.title }}</p>
-                <span class="albums-type">{{ albums.type }}</span>
-              </div>
+              <album-cover :album="album" />
+              <span class="albums-type">{{ album.type }}</span>
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="albums-img"
-                :style="`background-image: url('${albums.picUrl}')`"
-              >
-                <div class="btn-area">
-                  <a-button class="al-play" shape="circle"
-                    ><my-icon type="icon-bofang"></my-icon
-                  ></a-button>
-                  <a-button class="al-content" shape="circle"
-                    ><my-icon type="icon-shenglve"></my-icon
-                  ></a-button>
-                </div>
-              </div>
-              <div class="albums-info">
-                <p class="albums-title">{{ albums.title }}</p>
-                <span class="albums-type">{{ albums.type }}</span>
-              </div>
+              <album-cover :album="album" />
+              <span class="albums-type">{{ album.type }}</span>
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="albums-img"
-                :style="`background-image: url('${albums.picUrl}')`"
-              >
-                <div class="btn-area">
-                  <a-button class="al-play" shape="circle"
-                    ><my-icon type="icon-bofang"></my-icon
-                  ></a-button>
-                  <a-button class="al-content" shape="circle"
-                    ><my-icon type="icon-shenglve"></my-icon
-                  ></a-button>
-                </div>
-              </div>
-              <div class="albums-info">
-                <p class="albums-title">{{ albums.title }}</p>
-                <span class="albums-type">{{ albums.type }}</span>
-              </div>
+              <album-cover :album="album" />
+              <span class="albums-type">{{ album.type }}</span>
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="albums-img"
-                :style="`background-image: url('${albums.picUrl}')`"
-              >
-                <div class="btn-area">
-                  <a-button class="al-play" shape="circle"
-                    ><my-icon type="icon-bofang"></my-icon
-                  ></a-button>
-                  <a-button class="al-content" shape="circle"
-                    ><my-icon type="icon-shenglve"></my-icon
-                  ></a-button>
-                </div>
-              </div>
-              <div class="albums-info">
-                <p class="albums-title">{{ albums.title }}</p>
-                <span class="albums-type">{{ albums.type }}</span>
-              </div>
+              <album-cover :album="album" />
+              <span class="albums-type">{{ album.type }}</span>
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="albums-img"
-                :style="`background-image: url('${albums.picUrl}')`"
-              >
-                <div class="btn-area">
-                  <a-button class="al-play" shape="circle"
-                    ><my-icon type="icon-bofang"></my-icon
-                  ></a-button>
-                  <a-button class="al-content" shape="circle"
-                    ><my-icon type="icon-shenglve"></my-icon
-                  ></a-button>
-                </div>
-              </div>
-              <div class="albums-info">
-                <p class="albums-title">{{ albums.title }}</p>
-                <span class="albums-type">{{ albums.type }}</span>
-              </div>
+              <album-cover :album="album" />
+              <span class="albums-type">{{ album.type }}</span>
             </a-col>
-
             <a-col :span="12">
-              <div
-                class="albums-img"
-                :style="`background-image: url('${albums.picUrl}')`"
-              >
-                <div class="btn-area">
-                  <a-button class="al-play" shape="circle"
-                    ><my-icon type="icon-bofang"></my-icon
-                  ></a-button>
-                  <a-button class="al-content" shape="circle"
-                    ><my-icon type="icon-shenglve"></my-icon
-                  ></a-button>
-                </div>
-              </div>
-              <div class="albums-info">
-                <p class="albums-title">{{ albums.title }}</p>
-                <span class="albums-type">{{ albums.type }}</span>
-              </div>
+              <album-cover :album="album" />
+              <span class="albums-type">{{ album.type }}</span>
             </a-col>
           </a-row>
         </div>
@@ -227,6 +81,8 @@
 </template>
 
 <script>
+import VideoCover from "@/components/default/VideoCover";
+import AlbumCover from "@/components/default/AlbumCover";
 export default {
   name: "Discover",
   data: () => ({
@@ -235,19 +91,23 @@ export default {
       artist: "The Weekend",
       title: "House Of Balloons (Original)",
     },
-    recm: {
-      picUrl: require("@/assets/default-cover.jpg"),
+    video: {
+      picUrl: "",
       title: "《超级面对面》 独家专访 Dua Lipa 预告片",
       artist: " 超级面对面",
       num: "6K",
     },
-    albums: {
-      picUrl: require("@/assets/default-cover.jpg"),
-      title: "《超级面对面》 独家专访 Dua Lipa 预告片",
-      type: "超级推荐",
+    album: {
+      picUrl: "",
+      name: "《超级面对面》 独家专访 Dua Lipa 预告片",
+      link: "/",
+      type: " 编辑推荐：世界上最远的距离，是上班通勤的路",
     },
   }),
-  components: {},
+  components: {
+    VideoCover,
+    AlbumCover,
+  },
 };
 </script>
 
@@ -326,66 +186,17 @@ export default {
   }
 
   .recm-mv {
-    .ant-col {
-      .recom-img {
-        @include box-btn-area2;
-        // @include hover-box;
-        // position: relative;
-        // &:hover > button {
-        //   display: flex;
-        // }
-        // button {
-        //   @include box-btn;
-        //   position: absolute;
-        //   top: 50%;
-        //   left: 50%;
-        //   transform: translate(-50%, -50%);
-        // }
-      }
-      .recom-info {
-        font-size: 0.78rem;
-        font-weight: 600;
-        .recom-title {
-          @include box-title;
-        }
-        .recom-artist {
-          color: $theme-color;
-        }
-      }
-    }
   }
 
   .hot-albums {
-    .albums-img {
-      padding-bottom: 100% !important;
-      height: 0;
-      @include box-btn-area1;
-      // position: relative;
-      // @include hover-box;
-      // &:hover {
-      //   .btn-area > button {
-      //     display: flex;
-      //   }
-      // }
-      // .btn-area {
-      //   position: absolute;
-      //   bottom: 8px;
-      //   width: 100%;
-      //   display: flex;
-      //   justify-content: space-around;
-      //   button {
-      //     @include box-btn;
-      //   }
-      // }
-    }
-    .albums-info {
-      @include box-title-info;
-      .albums-title {
-        @include box-title;
-      }
-      .albums-type {
-        color: #bdbdbd;
-      }
+    .albums-type {
+      color: #bdbdbd;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.0333333333em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 }

@@ -6,105 +6,22 @@
       <div class="container">
         <a-row>
           <a-col :span="4">
-            <div
-              class="ban-img"
-              :style="`background-image: url('${ban.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="ban-name"><a href="">사랑의 콜센타 PART47</a></p>
+            <album-cover :album="album" />
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="ban-img"
-              :style="`background-image: url('${ban.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="ban-name"><a href="">사랑의 콜센타 PART47</a></p>
+            <album-cover :album="album" />
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="ban-img"
-              :style="`background-image: url('${ban.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="ban-name"><a href="">사랑의 콜센타 PART47</a></p>
+            <album-cover :album="album" />
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="ban-img"
-              :style="`background-image: url('${ban.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="ban-name"><a href="">사랑의 콜센타 PART47</a></p>
+            <album-cover :album="album" />
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="ban-img"
-              :style="`background-image: url('${ban.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="ban-name"><a href="">사랑의 콜센타 PART47</a></p>
+            <album-cover :album="album" />
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="ban-img"
-              :style="`background-image: url('${ban.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="ban-name"><a href="">사랑의 콜센타 PART47</a></p>
+            <album-cover :album="album" />
           </a-col>
         </a-row>
       </div>
@@ -115,46 +32,8 @@
       <p class="main-title">Moods & Genres</p>
       <div class="container">
         <a-row>
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
-          </a-col>
-
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
-          </a-col>
-
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
-          </a-col>
-
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
-          </a-col>
-
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
-          </a-col>
-
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
-          </a-col>
-
-          <a-col :span="4">
-            <div class="moon-type">
-              <span class="type-name">综艺</span>
-            </div>
+          <a-col :span="4"  v-for="(item,idx) of moon" :key="idx">
+              <moon-cover :moon="item" />
           </a-col>
         </a-row>
       </div>
@@ -166,67 +45,16 @@
       <div class="container">
         <a-row>
           <a-col :span="6">
-            <div
-              class="videos-img"
-              :style="`background-image: url('${videos.picUrl}')`"
-            >
-              <a-button shape="circle"
-                ><my-icon type="icon-bofang"></my-icon
-              ></a-button>
-            </div>
-            <div class="videos-info">
-              <p class="videos-title">{{ videos.title }}</p>
-              <span class="videos-artist">{{ videos.artist }} ·</span>
-              <span class="videos-num">{{ videos.num }} Views</span>
-            </div>
+            <video-cover :video="video" />
           </a-col>
-
           <a-col :span="6">
-            <div
-              class="videos-img"
-              :style="`background-image: url('${videos.picUrl}')`"
-            >
-              <a-button shape="circle"
-                ><my-icon type="icon-bofang"></my-icon
-              ></a-button>
-            </div>
-            <div class="videos-info">
-              <p class="videos-title">{{ videos.title }}</p>
-              <span class="videos-artist">{{ videos.artist }} ·</span>
-              <span class="videos-num">{{ videos.num }} Views</span>
-            </div>
+            <video-cover :video="video" />
           </a-col>
-
           <a-col :span="6">
-            <div
-              class="videos-img"
-              :style="`background-image: url('${videos.picUrl}')`"
-            >
-              <a-button shape="circle"
-                ><my-icon type="icon-bofang"></my-icon
-              ></a-button>
-            </div>
-            <div class="videos-info">
-              <p class="videos-title">{{ videos.title }}</p>
-              <span class="videos-artist">{{ videos.artist }} ·</span>
-              <span class="videos-num">{{ videos.num }} Views</span>
-            </div>
+            <video-cover :video="video" />
           </a-col>
-
           <a-col :span="6">
-            <div
-              class="videos-img"
-              :style="`background-image: url('${videos.picUrl}')`"
-            >
-              <a-button shape="circle"
-                ><my-icon type="icon-bofang"></my-icon
-              ></a-button>
-            </div>
-            <div class="videos-info">
-              <p class="videos-title">{{ videos.title }}</p>
-              <span class="videos-artist">{{ videos.artist }} ·</span>
-              <span class="videos-num">{{ videos.num }} Views</span>
-            </div>
+            <video-cover :video="video" />
           </a-col>
         </a-row>
       </div>
@@ -238,105 +66,22 @@
       <div class="container">
         <a-row>
           <a-col :span="4">
-            <div
-              class="charts-img"
-              :style="`background-image: url('${charts.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="charts-name"><a href="">飙升榜</a></p>
+              <album-cover :album="charts"/>
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="charts-img"
-              :style="`background-image: url('${charts.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="charts-name"><a href="">飙升榜</a></p>
+              <album-cover :album="charts"/>
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="charts-img"
-              :style="`background-image: url('${charts.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="charts-name"><a href="">飙升榜</a></p>
+              <album-cover :album="charts"/>
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="charts-img"
-              :style="`background-image: url('${charts.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="charts-name"><a href="">飙升榜</a></p>
+              <album-cover :album="charts"/>
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="charts-img"
-              :style="`background-image: url('${charts.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="charts-name"><a href="">飙升榜</a></p>
+              <album-cover :album="charts"/>
           </a-col>
-
           <a-col :span="4">
-            <div
-              class="charts-img"
-              :style="`background-image: url('${charts.picUrl}`"
-            >
-              <div class="btn-area">
-                <a-button class="al-play" shape="circle"
-                  ><my-icon type="icon-bofang"></my-icon
-                ></a-button>
-                <a-button class="al-content" shape="circle"
-                  ><my-icon type="icon-shenglve"></my-icon
-                ></a-button>
-              </div>
-            </div>
-            <p class="charts-name"><a href="">飙升榜</a></p>
+              <album-cover :album="charts"/>
           </a-col>
         </a-row>
       </div>
@@ -345,23 +90,44 @@
 </template>
 
 <script>
+import VideoCover from '@/components/default/VideoCover'
+import AlbumCover from '@/components/default/AlbumCover'
+import MoonCover from '@/components/default/MoonCover'
 export default {
   name: "Explore",
   data: () => ({
-    ban: {
-      picUrl: require("@/assets/default-cover.jpg"),
+    album:{
+      picUrl: '',
+      name: "사랑의 콜센타 PART47",
+      link:'/'
     },
-    videos: {
-      picUrl: require("@/assets/default-cover.jpg"),
+    video: {
+      picUrl: '',
       title: "彩券",
       artist: "薛之谦",
       num: "637K",
     },
+    moon:[
+      {name:'综艺', color:'#1890ff'},
+      {name:'流行', color:'#1890ff'},
+      {name:'影视原声', color:'#1890ff'},
+      {name:'综艺', color:'#1890ff'},
+      {name:'综艺', color:'#1890ff'},
+      {name:'综艺', color:'#1890ff'},
+      {name:'综艺', color:'#1890ff'},
+      {name:'综艺', color:'#1890ff'}
+    ],
     charts:{
-      picUrl:require("@/assets/default-cover.jpg"),
+      picUrl: '',
+      name: '飙升榜',
+      link: '/'
     }
   }),
-  components: {},
+  components: {
+    VideoCover,
+    AlbumCover,
+    MoonCover
+  },
 };
 </script>
 
@@ -383,26 +149,6 @@ export default {
     padding: 12px;
   }
 
-  .new-release,.charts {
-    .ban-img,.charts-img {
-      @include hover-box;
-      @include box-btn-area1;
-      padding-bottom: 100%;
-    }
-
-    .ban-name,.charts-name {
-      @include box-title;
-      text-align: center;
-      a {
-        color: $main-text-color;
-      }
-    }
-
-    .charts-name{
-      text-align: left;
-    }
-  }
-
   .moon {
     .moon-type {
       height: 36px;
@@ -421,22 +167,6 @@ export default {
       }
       .type-name {
         font-size: 0.7rem;
-      }
-    }
-  }
-
-  .videos {
-    .videos-img {
-      @include box-btn-area2;
-    }
-    .videos-info {
-      font-size: 0.78rem;
-      font-weight: 600;
-      .videos-title {
-        @include box-title;
-      }
-      .videos-artist {
-        color: $theme-color;
       }
     }
   }
