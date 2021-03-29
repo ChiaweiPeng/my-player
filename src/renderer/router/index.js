@@ -3,10 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 const musicRoutes = [{
-  path:'/discover',
-  name:'discover',
+  path: '/discover',
+  name: 'discover',
   component: () => import('../view/Discover'),
-  meta:{keepAlive:true}
+  meta: {keepAlive: true}
 },
 {
   path: '/explore',
@@ -15,7 +15,6 @@ const musicRoutes = [{
   meta: { keepAlive: true }
 }]
 
-
 export default new Router({
   routes: [
     {
@@ -23,7 +22,7 @@ export default new Router({
       name: 'Home',
       component: () => import('../view/index'),
       children: musicRoutes,
-      redirect:{path:'/discover'}
+      redirect: {path: '/discover'}
     },
     {
       path: '*',

@@ -7,11 +7,11 @@
           <a-card :bordered="false" hoverable>
             <div
               class="ban-img"
-              :style="`background-image: url('${ban.picUrl}')`"
+              :style="`background-image: url('${release.picUrl}')`"
             >
               <div class="ban-img-content">
-                <p class="ban-artist">{{ ban.artist }}</p>
-                <p class="ban-title">{{ ban.title }}</p>
+                <p class="ban-artist">{{ release.company }}</p>
+                <p class="ban-title">{{ release.name }}</p>
                 <div class="btn-area">
                   <a-button class="btn-play" shape="round">
                     <my-icon type="icon-bofang"></my-icon>
@@ -29,17 +29,8 @@
         <div class="recm-mv">
           <div class="title">Recommend Music Video</div>
           <a-row>
-            <a-col :span="12">
-              <video-cover :video="video" />
-            </a-col>
-            <a-col :span="12">
-              <video-cover :video="video" />
-            </a-col>
-            <a-col :span="12">
-              <video-cover :video="video" />
-            </a-col>
-            <a-col :span="12">
-              <video-cover :video="video" />
+            <a-col :span="12" v-for="item of mvs" :key="item.id">
+              <video-cover :video="item" />
             </a-col>
           </a-row>
         </div>
@@ -49,29 +40,9 @@
         <div class="hot-albums">
           <div class="title">Hot albums</div>
           <a-row>
-            <a-col :span="12">
-              <album-cover :album="album" />
-              <span class="albums-type">{{ album.type }}</span>
-            </a-col>
-            <a-col :span="12">
-              <album-cover :album="album" />
-              <span class="albums-type">{{ album.type }}</span>
-            </a-col>
-            <a-col :span="12">
-              <album-cover :album="album" />
-              <span class="albums-type">{{ album.type }}</span>
-            </a-col>
-            <a-col :span="12">
-              <album-cover :album="album" />
-              <span class="albums-type">{{ album.type }}</span>
-            </a-col>
-            <a-col :span="12">
-              <album-cover :album="album" />
-              <span class="albums-type">{{ album.type }}</span>
-            </a-col>
-            <a-col :span="12">
-              <album-cover :album="album" />
-              <span class="albums-type">{{ album.type }}</span>
+            <a-col :span="12" v-for="item of playLists" :key="item.id">
+              <album-cover :data="item"  type="playlist"/>
+              <span class="albums-type">{{ item.copywriter }}</span>
             </a-col>
           </a-row>
         </div>
@@ -81,38 +52,38 @@
 </template>
 
 <script>
-import VideoCover from "@/components/default/VideoCover";
-import AlbumCover from "@/components/default/AlbumCover";
+import VideoCover from '@/components/default/VideoCover'
+import AlbumCover from '@/components/default/AlbumCover'
+import { getPersonalized, newAlbums, getMv } from '@/api'
 export default {
-  name: "Discover",
+  name: 'Discover',
   data: () => ({
-    ban: {
-      picUrl: require("@/assets/default-cover.jpg"),
-      artist: "The Weekend",
-      title: "House Of Balloons (Original)",
-    },
-    video: {
-      picUrl: "",
-      title: "《超级面对面》 独家专访 Dua Lipa 预告片",
-      artist: " 超级面对面",
-      num: "6K",
-    },
-    album: {
-      picUrl: "",
-      name: "《超级面对面》 独家专访 Dua Lipa 预告片",
-      link: "/",
-      type: " 编辑推荐：世界上最远的距离，是上班通勤的路",
-    },
+    playLists: [],
+    release: {},
+    mvs: []
   }),
   components: {
     VideoCover,
-    AlbumCover,
+    AlbumCover
   },
-};
+  async created () {
+    try {
+      const [playlists, { albums }, { result: mvs }] = await Promise.all([
+        getPersonalized(),
+        newAlbums({ limit: 1, area: 'EA' }),
+        getMv()
+      ])
+      this.playLists = playlists.result.slice(0, 6)
+      this.release = albums[0]
+      this.mvs = mvs
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/global";
 @import "@/scss/common";
 // 某些需要设置全局才有效
 .ant-card :global(.ant-card-body) {

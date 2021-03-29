@@ -1,6 +1,9 @@
 'use strict'
 
 process.env.BABEL_ENV = 'renderer'
+// 配置全局环境
+process.env.VUE_APP_API_DEV_ELECTRON='http://localhost:6001'
+process.env.VUE_APP_API_PRODUCT='http://127.0.0.1:6002'
 
 const path = require('path')
 const { dependencies } = require('../package.json')

@@ -2,35 +2,77 @@
   <div class="album-cover">
     <div
       class="album-img"
-      :style="`background-image: url('${
-        album.picUrl ? album.picUrl : defaultCover
-      }`"
+      :style="`background-image: url('${coverBgUrl}')`"
     >
       <div class="btn-area">
-        <a-button class="al-play" shape="circle"
+        <a-button class="al-play" shape="circle" @click="play"
           ><my-icon type="icon-bofang"></my-icon
         ></a-button>
-        <a-button class="al-content" shape="circle"
+        <a-button class="al-content" shape="circle" @click="play"
           ><my-icon type="icon-shenglve"></my-icon
         ></a-button>
       </div>
     </div>
     <p class="album-name">
-      <a :href="album.link">{{ album.name }}</a>
+      <!-- <router-link to="/"> -->
+        <a :href="data.link">{{ data.name }}</a>
+      <!-- </router-link> -->
     </p>
   </div>
 </template>
 
 <script>
+import{ getPlayList, getAlbum, getArtist} from '@/api'
 export default {
   name: "AlbumCover",
   data: () => ({
-    defaultCover: require("@/assets/default-cover.jpg"),
+    // defaultCover: require("@/assets/default-cover.jpg"),
   }),
   props: {
-    album: Object,
+    data: {
+      type: Object,
+      default:() => ({
+        'id': 3117618863,
+        'name': '所以你并没有坚定选择过我.',
+        'copywriter': '热门推荐',
+        'picUrl': 'https://p1.music.126.net/6mnrODz-pMVBq8UReZqfLA==/109951165533152791.jpg',
+      })
+    },
+    type:{
+      type:String,
+      default: 'album'
+    }
   },
   components: {},
+  computed:{
+    coverBgUrl() {
+      return this.data.picUrl ? this.data.picUrl : this.data.coverImgUrl
+    },
+    service() {
+      return {
+        'album':getAlbum,
+        'playlist': getPlayList,
+        'artist': getArtist
+      }[this.type]
+    }
+  },
+  methods:{
+    async play(){
+      console.log('aa')
+      // const data = await this.service(this.data.id)
+      // let list = []
+      // if(this.type === 'album') {
+      //   list = data.songs
+      // } else if (this.type === 'playlist'){
+      //   list = data.playlist.tracks
+      // } else {
+      //   list = data.list
+      }
+      // await this.$store.dispatch('music/updataPlayingList', list)
+      // await this.$store.dispatch('music/updataTack', {id: list[0].id})
+      // this.loading = false
+    // }
+  }
 };
 </script>
 

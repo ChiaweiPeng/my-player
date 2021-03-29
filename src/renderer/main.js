@@ -7,7 +7,6 @@ import store from './store'
 
 import '@/scss/global.scss'
 
-
 // 全局引入ant-design-vue
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
@@ -16,9 +15,9 @@ Vue.use(Antd)
 
 // 引入iconfont 并挂载到全局组件
 const MyIcon = Icon.createFromIconfontCN({
-  scriptUrl:'//at.alicdn.com/t/font_2430341_bfuwxkmji5.js'
+  scriptUrl: '//at.alicdn.com/t/font_2430341_uhtwam26ogi.js'
 })
-Vue.component('MyIcon',MyIcon)
+Vue.component('MyIcon', MyIcon)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios

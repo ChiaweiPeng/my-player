@@ -80,46 +80,46 @@
 
 <script>
 export default {
-  name: "DefaultNavbar",
+  name: 'DefaultNavbar',
   data: () => ({
     isNight: false,
     current: 0,
-    defaultNav1:{
-      nav_title:'MUSIC',
-      nav_item:[
-        {name:'Discover music',val:'dicover',to:'/discover',icon:'icon-node'},
-        {name:'Explore',val:'explore',to:'/explore',icon:'icon-song-circle'},
-        {name:'Private FM',val:'fm',to:'/fm',icon:'icon-music-node'},
-        {name:'Daily Recommend',val:'recommend',to:'/recommend',icon:'icon-earphone'}
+    defaultNav1: {
+      nav_title: 'MUSIC',
+      nav_item: [
+        {name: 'Discover music', val: 'dicover', to: '/discover', icon: 'icon-node'},
+        {name: 'Explore', val: 'explore', to: '/explore', icon: 'icon-song-circle'},
+        {name: 'Private FM', val: 'fm', to: '/fm', icon: 'icon-music-node'},
+        {name: 'Daily Recommend', val: 'recommend', to: '/recommend', icon: 'icon-earphone'}
       ]
     },
-    defaultNav2:{
-      nav_title:'LIBRARY',
-      nav_item:[
-        {key:'4',name:'My Collection',val:'collection',to:'/my-collection',icon:'icon-ipod'},
-        {key:'5',name:'My Cloud Disk', val:'disk',to:'/cloud-disk',icon:'icon-cdsvg'},
-        {key:'6',name:'My Radio',val:'radio',to:'/my-radio',icon:'icon-radio'}
+    defaultNav2: {
+      nav_title: 'LIBRARY',
+      nav_item: [
+        {key: '4', name: 'My Collection', val: 'collection', to: '/my-collection', icon: 'icon-ipod'},
+        {key: '5', name: 'My Cloud Disk', val: 'disk', to: '/cloud-disk', icon: 'icon-cdsvg'},
+        {key: '6', name: 'My Radio', val: 'radio', to: '/my-radio', icon: 'icon-radio'}
       ]
     }
   }),
-  props:{
-    collapsed:Boolean
+  props: {
+    collapsed: Boolean
   },
   components: {},
   methods: {
-    handleTabNight(e) {
-      this.isNight = !this.isNight;
+    handleTabNight (e) {
+      this.isNight = !this.isNight
     },
-    handleSignIn(e) {
-      console.log("sign-in");
+    handleSignIn (e) {
+      console.log('sign-in')
     },
-    handleTabContent(key,link) {
+    handleTabContent (key, link) {
       // console.log(key, link);
-      this.current = key;
-      this.$router.push(link);
-    },
-  },
-};
+      this.current = key
+      this.$router.push(link)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

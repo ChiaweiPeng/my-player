@@ -9,29 +9,33 @@
       <default-header @tabCollapsed="handleCollapsed"></default-header>
       <default-view></default-view>
     </a-layout>
+
+    <default-playbar></default-playbar>
   </div>
 </template>
 
 <script>
-import DefaultHeader from "@/components/layout/Header";
-import DefaultNavbar from "@/components/layout/Navbar";
-import DefaultView from "@/components/layout/View";
+import DefaultHeader from '@/components/layout/Header'
+import DefaultNavbar from '@/components/layout/Navbar'
+import DefaultView from '@/components/layout/View'
+import DefaultPlaybar from '@/components/playbar/PlayBar'
 export default {
-  name: "Layout",
+  name: 'Layout',
   data: () => ({
-    collapsed: false,
+    collapsed: false
   }),
   components: {
     DefaultNavbar,
     DefaultHeader,
     DefaultView,
+    DefaultPlaybar
   },
   methods: {
-    handleCollapsed(collapsed) {
-      this.collapsed = collapsed;
-    },
-  },
-};
+    handleCollapsed (collapsed) {
+      this.collapsed = collapsed
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

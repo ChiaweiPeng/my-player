@@ -5,23 +5,8 @@
       <p class="main-title">New Albums & EP</p>
       <div class="container">
         <a-row>
-          <a-col :span="4">
-            <album-cover :album="album" />
-          </a-col>
-          <a-col :span="4">
-            <album-cover :album="album" />
-          </a-col>
-          <a-col :span="4">
-            <album-cover :album="album" />
-          </a-col>
-          <a-col :span="4">
-            <album-cover :album="album" />
-          </a-col>
-          <a-col :span="4">
-            <album-cover :album="album" />
-          </a-col>
-          <a-col :span="4">
-            <album-cover :album="album" />
+          <a-col :span="4" v-for="item of newRelease" :key="item.id">
+            <album-cover :data="item" type='playlist'/>
           </a-col>
         </a-row>
       </div>
@@ -32,7 +17,7 @@
       <p class="main-title">Moods & Genres</p>
       <div class="container">
         <a-row>
-          <a-col :span="4"  v-for="(item,idx) of moon" :key="idx">
+          <a-col :span="4"  v-for="item of tags" :key="item.id">
               <moon-cover :moon="item" />
           </a-col>
         </a-row>
@@ -44,17 +29,8 @@
       <p class="main-title">New Music Video</p>
       <div class="container">
         <a-row>
-          <a-col :span="6">
-            <video-cover :video="video" />
-          </a-col>
-          <a-col :span="6">
-            <video-cover :video="video" />
-          </a-col>
-          <a-col :span="6">
-            <video-cover :video="video" />
-          </a-col>
-          <a-col :span="6">
-            <video-cover :video="video" />
+          <a-col :span="6" v-for="item of mvs" :key="item.id">
+            <video-cover :video="item" />
           </a-col>
         </a-row>
       </div>
@@ -65,23 +41,8 @@
       <p class="main-title">Leader Board</p>
       <div class="container">
         <a-row>
-          <a-col :span="4">
-              <album-cover :album="charts"/>
-          </a-col>
-          <a-col :span="4">
-              <album-cover :album="charts"/>
-          </a-col>
-          <a-col :span="4">
-              <album-cover :album="charts"/>
-          </a-col>
-          <a-col :span="4">
-              <album-cover :album="charts"/>
-          </a-col>
-          <a-col :span="4">
-              <album-cover :album="charts"/>
-          </a-col>
-          <a-col :span="4">
-              <album-cover :album="charts"/>
+          <a-col :span="4" v-for="item of topList" :key="item.id">
+              <album-cover :data="item" type="playlist"/>
           </a-col>
         </a-row>
       </div>
@@ -93,42 +54,36 @@
 import VideoCover from '@/components/default/VideoCover'
 import AlbumCover from '@/components/default/AlbumCover'
 import MoonCover from '@/components/default/MoonCover'
+import {getCatList, newAlbums, getNewMv, getTopList} from '@/api'
+import {filter} from 'lodash'
 export default {
-  name: "Explore",
+  name: 'Explore',
   data: () => ({
-    album:{
-      picUrl: '',
-      name: "사랑의 콜센타 PART47",
-      link:'/'
-    },
-    video: {
-      picUrl: '',
-      title: "彩券",
-      artist: "薛之谦",
-      num: "637K",
-    },
-    moon:[
-      {name:'综艺', color:'#1890ff'},
-      {name:'流行', color:'#1890ff'},
-      {name:'影视原声', color:'#1890ff'},
-      {name:'综艺', color:'#1890ff'},
-      {name:'综艺', color:'#1890ff'},
-      {name:'综艺', color:'#1890ff'},
-      {name:'综艺', color:'#1890ff'},
-      {name:'综艺', color:'#1890ff'}
-    ],
-    charts:{
-      picUrl: '',
-      name: '飙升榜',
-      link: '/'
-    }
+    newRelease: [],
+    tags: [],
+    mvs: [],
+    topList: []
   }),
   components: {
     VideoCover,
     AlbumCover,
     MoonCover
   },
-};
+  created () {
+    this.fetch()
+  },
+  methods: {
+    async fetch () {
+      const [{sub}, {albums}, {data: mvs}, {list: topList}] = await Promise.all([getCatList(), newAlbums({limit: 6}), getNewMv({limit: 4}), getTopList()])
+      this.tags = sub.slice(0, 18).map(i => {
+        return i
+      })
+      this.newRelease = albums
+      this.mvs = mvs
+      this.topList = filter(topList, i => [60198, 11641012, 180106, 19723756, 2884035, 5059661515].includes(i.id))
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

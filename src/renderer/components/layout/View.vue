@@ -10,10 +10,10 @@
 
 <script>
 export default {
-  name: "DefaultView",
+  name: 'DefaultView',
   data: () => ({}),
-  components: {},
-};
+  components: {}
+}
 </script>
 
 <style scoped lang="scss">
@@ -22,6 +22,7 @@ export default {
   @include theme--light-app;
   padding: 32px;
   padding-top: 16px;
+  padding-bottom: 64px;
   min-height: 800px;
 }
 </style>

@@ -21,24 +21,24 @@
 
 <script>
 export default {
-  name: "DefaultHeader",
+  name: 'DefaultHeader',
   data: () => ({
     collapsed: false,
-    searchVal:''
+    searchVal: ''
   }),
   props: {},
   components: {},
   methods: {
-    handleCollapsed(e) {
-      this.collapsed = !this.collapsed;
-      this.$emit("tabCollapsed", this.collapsed);
+    handleCollapsed (e) {
+      this.collapsed = !this.collapsed
+      this.$emit('tabCollapsed', this.collapsed)
     },
 
-    hanldeGobalSearch(e){
+    hanldeGobalSearch (e) {
       console.log(this.searchVal)
     }
-  },
-};
+  }
+}
 </script>
 
 <style scoped lang="scss">

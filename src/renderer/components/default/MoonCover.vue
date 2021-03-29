@@ -6,13 +6,13 @@
 
 <script>
 export default {
-  name: "MoonCover",
+  name: 'MoonCover',
   data: () => ({}),
   props: {
-    moon: Object,
+    moon: Object
   },
-  components: {},
-};
+  components: {}
+}
 </script>
 
 <style scoped lang="scss">
@@ -25,7 +25,7 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 6px;
   border-left: 6px solid;
-  //   border-left-color: $theme-color;
+  border-left-color: $theme-color;
   &:hover {
     background: #eaeaea;
     opacity: 0.8;
