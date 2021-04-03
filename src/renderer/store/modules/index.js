@@ -11,4 +11,9 @@ files.keys().forEach(key => {
   modules[key.replace(/(\.\/|\.js)/g, '')] = files(key).default
 })
 
-export default modules
+// export default modules
+// export {default as music} from './music'
+// export {default as app} from './app'
+// export {default as settings} from './settings'
+// export {default as snackbar} from './snackbar'
+export {default as change} from './change'

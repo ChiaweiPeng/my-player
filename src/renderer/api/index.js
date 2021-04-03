@@ -39,49 +39,48 @@ export const getNewMv = params => xhr.get('/mv/first', {params})
 */
 export const getTopList = () => xhr.get('/toplist')
 
-/* 
+/*
     获取歌单详情,根据歌单id返回歌单详细信息
 */
-export const getPlayList  = id => xhr.get(`/playlist/detail?id=${id}`);
+export const getPlayList = id => xhr.get(`/playlist/detail?id=${id}`)
 
-/* 
+/*
     获取专辑详情，根据歌单id返回歌单详细信息
 */
-export const getAlbum = id => xhr.get('/album', {params:{id}})
+export const getAlbum = id => xhr.get('/album', {params: {id}})
 
-/* 
+/*
     获取歌手详情
 */
 export const getArtist = id => xhr.get(`/artists?id=${id}`)
 
-/* 
+/*
     获取歌词
 */
 export const getLyric = id => xhr.get(`/lyric?id=${id}`)
 
-/* 
+/*
     获取歌曲详情
 */
-export const getoSongData = (ids=[]) => xhr.get(`/song/detail?ids=${ids.join()}`)
+export const getSongData = (ids = []) => xhr.get(`/song/detail?ids=${ids.join()}`)
 
-/* 
+/*
     获取歌曲可播放url
 */
 export const getSongUrl = id => xhr.get(`/song/url?id=${id}`)
 
-
 /* ===== */
-/* 
+/*
     标记|取消，喜欢音乐
 */
-export  const favTrack = (params) => {
-    params['timestamp'] = new Date().getTime()
-    return xhr.get('/like', {
-        params
-    })
+export const favTrack = (params) => {
+  params['timestamp'] = new Date().getTime()
+  return xhr.get('/like', {
+    params
+  })
 }
 
-/* 
+/*
     获取喜欢列表
 */
 export const getLikeList = () => xhr.get('/likelist')

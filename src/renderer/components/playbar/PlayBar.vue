@@ -1,183 +1,215 @@
 <template>
   <a-layout-footer>
-    <div class="play-progress">
-      <!-- <a-progress :percent="percent" :showInfo="false" :strokeLinecap="square"/> -->
-      <a-slider
-        @afterChange="onAfterPlaybarChange"
-        v-model="playProgress"
-      ></a-slider>
-    </div>
-    <div class="play-control">
-      <div class="playbar-left">
-        <div class="song-img">
-          <a-avatar
-            shape="square"
-            :size="40"
-            :src="require(`@/assets/default-cover.jpg`)"
-          />
-          <a-button type="square" size="large" class="tab-big">
-            <my-icon type="icon-zhankai"></my-icon>
+      <div class="play-progress">
+        <!-- <a-progress :percent="percent" :showInfo="false" :strokeLinecap="square"/> -->
+        <a-slider
+          @afterChange="onAfterPlaybarChange"
+          v-model="currentTime"
+          :max="~~(track.dt / 1000)"
+          :min="0"
+          :tipFormatter="tipFormatter"
+        ></a-slider>
+      </div>
+      <div class="play-control">
+        <div class="playbar-left">
+          <div class="song-img">
+            <a-avatar shape="square" :size="40" :src="`${track.al.picUrl}`" />
+            <a-button type="square" size="large" class="tab-big">
+              <my-icon type="icon-zhankai"></my-icon>
+            </a-button>
+          </div>
+
+          <div class="song-info">
+            <a href="" class="song-name">{{ track.name }}</a>
+            <span class="text-dash">-</span>
+            <a href="" class="song-artist">{{ track.ar[0].name }}</a>
+          </div>
+        </div>
+        <div class="playbar-center">
+          <a-button shape="circle" size="large" @click="handleClickLike">
+            <my-icon
+              class="p-like"
+              :type="likeSong.icon"
+            ></my-icon>
+          </a-button>
+
+          <a-button shape="circle" size="large" @click="handleClickBackMusic"
+            ><my-icon class="p-back" type="icon-1_music83"></my-icon
+          ></a-button>
+
+          <a-button shape="circle" size="large" @click="handleClickStartPlay">
+            <my-icon class="p-play" :type="playingState.icon"></my-icon>
+          </a-button>
+
+          <a-button shape="circle" size="large" @click="handleClickForwardMuisc"
+            ><my-icon class="p-forward" type="icon-1_music82"></my-icon
+          ></a-button>
+
+          <a-button shape="circle" size="large" @click="handleClickTabMode">
+            <my-icon
+              class="p-mode"
+              :type="orderIconState.icon"
+            ></my-icon>
           </a-button>
         </div>
-
-        <div class="song-info">
-          <a href="" class="song-name">提坎库如克</a>
-          <span class="text-dash">-</span>
-          <a href="" class="song-artist">霓虹花园</a>
+        <div class="playbar-right">
+          <a-button shape="circle" size="large" @click="handleVolume">
+            <my-icon
+              class="p-vol"
+              :type="volumeIcon.icon"
+            ></my-icon>
+          </a-button>
+          <div class="volume-track">
+            <a-slider
+              @afterChange="onAfterVolumeChange"
+              v-model="volume"
+              :max="1"
+              :step="0.1"
+            ></a-slider>
+          </div>
+          <a-button shape="circle" size="large" @click="handleShowList">
+            <my-icon type="icon-playlist"></my-icon>
+          </a-button>
         </div>
       </div>
-      <div class="playbar-center">
-        <a-button shape="circle" size="large" @click="handleClickLike">
-          <my-icon
-            class="p-like"
-            type="icon-1_music90"
-            v-show="!playbarMode.activeLike"
-          ></my-icon>
-          <my-icon
-            class="p-activeLike"
-            type="icon-1_music90-copy"
-            v-show="playbarMode.activeLike"
-          ></my-icon>
-        </a-button>
-
-        <a-button shape="circle" size="large" @click="handleClickBackMusic"
-          ><my-icon class="p-back" type="icon-1_music83"></my-icon
-        ></a-button>
-
-        <a-button shape="circle" size="large" @click="handleClickStartPlay">
-          <my-icon
-            class="p-play"
-            type="icon-bofang"
-            v-show="!playbarMode.isPlaying"
-          ></my-icon>
-          <my-icon
-            class="p-stop"
-            type="icon-zanting-copy"
-            v-show="playbarMode.isPlaying"
-          ></my-icon>
-        </a-button>
-
-        <a-button shape="circle" size="large" @click="handleClickForwardMuisc"
-          ><my-icon class="p-forward" type="icon-1_music82"></my-icon
-        ></a-button>
-
-        <a-button shape="circle" size="large" @click="handleClickTabMode">
-          <my-icon
-            class="p-mode-list"
-            type="icon-1_music84"
-            v-show="playbarMode.cycleMode.listCycle"
-          ></my-icon>
-          <my-icon
-            class="p-mode-random"
-            type="icon-1_music85"
-            v-show="playbarMode.cycleMode.randomCycle"
-          ></my-icon>
-          <my-icon
-            class="p-mode-one"
-            type="icon-danquxunhuan"
-            v-show="playbarMode.cycleMode.oneCycle"
-          ></my-icon>
-        </a-button>
-      </div>
-      <div class="playbar-right">
-        <a-button shape="circle" size="large" @click="handleVolume">
-          <my-icon
-            class="p-vol-open"
-            type="icon-yinliangdayinliangda"
-            v-show="!playbarMode.muteVolume"
-          ></my-icon>
-          <my-icon
-            class="p-vol-close"
-            type="icon-yinliangxiaoyinliangxiao"
-            v-show="playbarMode.muteVolume"
-          ></my-icon>
-        </a-button>
-        <div class="volume-track">
-          <a-slider
-            @afterChange="onAfterVolumeChange"
-            v-model="volumeProgress"
-          ></a-slider>
-        </div>
-        <a-button shape="circle" size="large" @click="handleShowList">
-          <my-icon type="icon-playlist"></my-icon>
-        </a-button>
-      </div>
-    </div>
   </a-layout-footer>
 </template>
 
 <script>
+import { sync, get, dispatch, commit } from "vuex-pathify";
+import { mapGetters } from "vuex";
+import { formatDuring } from "@/utils/fn";
+
+import Player from "./Player";
+let prevVolume = 1;
+const PLAY_MODE = {
+  CYCLE: 0,
+  SINGLE_CYCLE: 1,
+  RANDOM: 2,
+};
 export default {
-  name: 'DefaultPlaybar',
+  name: "DefaultPlaybar",
+  extends: Player,
   data: () => ({
-    playProgress: 10,
-    volumeProgress: 20,
-    playbarMode: {
-      activeLike: false,
-      isPlaying: false,
-      cycleMode: {
-        listCycle: false,
-        randomCycle: true,
-        oneCycle: false
-      },
-      muteVolume: false
-    }
+    liked:false
   }),
   components: {},
+  computed: {
+    track: get("change/track"),
+    currentTrackId: get("change/currentTrackId"),
+    playingList: get("change/playingList"),
+    playing: get("change/playing"),
+    loadAuido: get("change/loadAudio"),
+    mode: sync('change/mode'),
+    ...mapGetters({
+      next: 'change/nextTrackId',
+      prev: 'change/prevTrackId',
+      // liked:'change/liked'
+    }),
+
+    likeSong() {
+      return !this.liked ? {icon:"icon-1_music90"} :{icon:"icon-1_music90-copy"}
+    },
+    playingState() {
+      return this.playing
+        ? { icon: "icon-zanting-copy" }
+        : { icon: "icon-bofang" };
+    },
+    orderIconState() {
+      // 切换模式图标
+      return([
+        {icon:'icon-1_music84'},
+        {icon:'icon-1_music85'},
+        {icon:'icon-danquxunhuan2'}
+      ])[this.mode]
+    },
+    volumeIcon(){
+      return this.volume === 0 ? {icon: 'icon-yinliangxiaoyinliangxiao'} : {icon:'icon-yinliangdayinliangda'}
+    }
+  },
+  watch: {
+    playing(val) {
+      this.$nextTick(() => {
+        if (val) {
+          this.play();
+        } else {
+          this.pause();
+        }
+      });
+    },
+  },
+  // computed:{
+  //   track:get('music/track'),
+  //   currentTrackId: get('music/currentTrackId'),
+  //   playingList: get('music/playingList'),
+  //   playing: get('music/playing'),
+  //   loadAudio: sync('music/loadAudio'),
+  //   showList: sync('music/showList'),
+  //   showLyricsPage: sync('music/showLyricsPage'),
+  //   mode: sync('music/mode'),
+  //   ...mapGetters({
+  //     next: 'music/nextTrackId',
+  //     prev:'music/prevTrackId',
+  //     liked: 'music/liked'
+  //   })
+  // },
   methods: {
-    onAfterPlaybarChange (val) {
-      console.log('onAfterPlaybarChange:' + val)
-      console.log('progress:' + this.playProgress)
+    onAfterPlaybarChange(val) {
+      console.log("onAfterPlaybarChange:" + val);
+      this.setSeek(val);
     },
-    onAfterVolumeChange (val) {
-      console.log('onAfterVolumeChange:' + val)
-      console.log('progress:' + this.volumeProgress)
+    onAfterVolumeChange(val) {
+      console.log("onAfterVolumeChange:" + val);
     },
-    handleClickLike (e) {
-      this.playbarMode.activeLike = !this.playbarMode.activeLike
+    handleClickLike(e) {
+      this.$store.dispatch('change/favSong',{id: this.id, like:!this.liked})
     },
-    handleClickBackMusic (e) {
-      console.log('backmusic')
+    handleClickBackMusic(e) {
+      this.$store.dispatch('change/updateTrack',{id:this.prev})
     },
-    handleClickForwardMuisc (e) {
-      console.log('forwardMusic')
+    handleClickForwardMuisc(e) {
+      this.$store.dispatch('change/updateTrack', {id:this.next})
     },
-    handleClickStartPlay (e) {
-      this.playbarMode.isPlaying = !this.playbarMode.isPlaying
+    // 播放按钮
+    handleClickStartPlay(e) {
+      commit("change/playing", !this.playing);
     },
-    handleClickTabMode (e) {
-      console.log('aa')
+    // 切换播放模式
+    handleClickTabMode(e) {
+      this.mode<2 ? this.mode++ : (this.mode = 0)
     },
-    handleVolume (e) {
-      this.playbarMode.muteVolume = !this.playbarMode.muteVolume
-      if (this.playbarMode.muteVolume) {
-        this.volumeProgress = 0
+    // 静音切换
+    handleVolume(e) {
+      if(this.volume === 0) {
+        this.volume = prevVolume
+      } else {
+        prevVolume = this.volume
+        this.volume = 0
       }
     },
-    handleShowList (e) {
-      console.log('song list')
-    }
-  }
-}
+    handleShowList(e) {
+      console.log(this.playingList);
+    },
+    tipFormatter(val) {
+      return formatDuring(val * 1000);
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
 @import "@/scss/global";
 @import "@/scss/common";
-.ant-slider :global(.ant-slider-handle) {
-  display: none;
-}
-.ant-slider:hover :global(.ant-slider-handle) {
-  display: block;
-}
 
-.ant-slider{
+@include slider;
+.ant-slider {
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 .ant-layout-footer {
-  @include theme--light-app;
+  background: rgba($color: #fff, $alpha: 1.0);
+  color: rgba(0, 0, 0, 0.87);
   position: fixed;
   bottom: 0;
   z-index: 100;
@@ -190,6 +222,8 @@ export default {
     justify-content: space-between;
     .playbar-left {
       display: flex;
+      flex: 1;
+      justify-content: flex-start;
       align-items: center;
       .song-img {
         position: relative;
@@ -240,6 +274,8 @@ export default {
     }
 
     .playbar-center {
+      flex: 2;
+      text-align: center;
       .ant-btn {
         border: transparent;
         margin: 0 5px;
@@ -258,21 +294,15 @@ export default {
         }
         .p-play {
           font-size: 1.7rem;
-          margin-left: 4px;
           color: $theme-color;
-        }
-        .p-stop {
-          font-size: 1.7rem;
-        }
-        .p-mode-one {
-          font-size: 1.3rem;
         }
       }
     }
 
     .playbar-right {
       display: flex;
-      justify-content: center;
+      flex: 1;
+      justify-content: flex-end;
       align-items: center;
       .ant-btn {
         border: transparent;
@@ -285,10 +315,6 @@ export default {
       .ant-slider {
         width: 7vw;
         margin-top: 7px;
-      }
-
-      .p-vol-close {
-        margin-right: 4px;
       }
     }
   }

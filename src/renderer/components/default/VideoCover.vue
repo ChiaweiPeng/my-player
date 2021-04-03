@@ -19,15 +19,15 @@
 
 <script>
 export default {
-  name: "VideoCover",
+  name: 'VideoCover',
   data: () => ({
-    defaultCover: require("@/assets/default-cover.jpg"),
+    defaultCover: require('@/assets/default-cover.jpg')
   }),
   props: {
-    video: Object,
+    video: Object
   },
-  components: {},
-};
+  components: {}
+}
 </script>
 
 <style scoped lang="scss">

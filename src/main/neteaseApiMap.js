@@ -5,7 +5,7 @@ const { cookieToJson } = require('NeteaseCloudMusicApi/util/index')
 const artist_list = require('NeteaseCloudMusicApi/module/artist_list')
 const artists = require('NeteaseCloudMusicApi/module/artists')
 
-const lyric = require('NeteaseCloudMusicApi/module/lyric')
+const lyric = require('NeteaseCloudMusicApi/module/lyric');
 
 const personalized = require('NeteaseCloudMusicApi/module/personalized')
 const personalized_newsong = require('NeteaseCloudMusicApi/module/personalized_newsong')
@@ -29,7 +29,7 @@ const toplist = require('NeteaseCloudMusicApi/module/toplist')
 
 module.exports = {
   '/artist_list': generatorFn(artist_list),
-  '/artists':generatorFn(artists),
+  '/artists': generatorFn(artists),
 
   '/lyric': generatorFn(lyric),
   '/like': generatorFn(like),

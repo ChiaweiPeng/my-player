@@ -115,3 +115,21 @@
       }
 }
 
+// 进度条样式调整
+@mixin slider {
+  .ant-slider :global(.ant-slider-handle) {
+    display: none;
+  }
+  .ant-slider:hover :global(.ant-slider-handle) {
+    display: block;
+  }
+  .ant-slider :global(.ant-slider-rail) {
+    height: 2px;
+  }
+  .ant-slider :global(.ant-slider-track){
+    height: 2px;
+  }
+  .ant-slider :global(.ant-slider-step){
+    height: 2px;
+  }
+}

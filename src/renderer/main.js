@@ -4,6 +4,7 @@ import axios from 'axios'
 import App from './App'
 import router from './router'
 import store from './store'
+// import {createStore} from './store'
 
 import '@/scss/global.scss'
 
@@ -15,7 +16,7 @@ Vue.use(Antd)
 
 // 引入iconfont 并挂载到全局组件
 const MyIcon = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2430341_uhtwam26ogi.js'
+  scriptUrl: '//at.alicdn.com/t/font_2430341_29lqtsq7gd.js'
 })
 Vue.component('MyIcon', MyIcon)
 
@@ -26,6 +27,7 @@ Vue.config.productionTip = false
 // 去除chrome控制台报错
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
+// const store = createStore()
 /* eslint-disable no-new */
 new Vue({
   components: { App },
