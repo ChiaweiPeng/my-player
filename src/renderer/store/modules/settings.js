@@ -1,10 +1,10 @@
 // Utilities
 import { make } from 'vuex-pathify'
-import Cookie from 'js-cookie';
+import Cookie from 'js-cookie'
 
-const NETEASEFLAG = 'MUSIC_U';
+const NETEASEFLAG = 'MUSIC_U'
 const state = () => {
-  let data = JSON.parse(localStorage.getItem('settings')) || {};
+  let data = JSON.parse(localStorage.getItem('settings')) || {}
 
   return Object.assign({
     locale: 'zh',
@@ -12,7 +12,7 @@ const state = () => {
     autoCache: false,
     theme: 'auto',
     volume: 0.8,
-    account: {},
+    account: {}
   }, data)
 }
 
@@ -30,22 +30,22 @@ const actions = {
     localStorage.setItem('settings', JSON.stringify(state))
   },
   updateAccount ({commit}, account) {
-    commit('account', account);
+    commit('account', account)
   },
-  signOut({commit}) {
-    commit('account', {});
-    Cookie.remove(NETEASEFLAG);
-  },
+  signOut ({commit}) {
+    commit('account', {})
+    Cookie.remove(NETEASEFLAG)
+  }
 }
 
 const getters = {
   logged: state => {
-    const music_u = Cookie.get(NETEASEFLAG);
-    return music_u && !!state.account.profile;
+    const music_u = Cookie.get(NETEASEFLAG)
+    return music_u && !!state.account.profile
   },
   userId: state => {
-    return state.account.profile.userId;
-  },
+    return state.account.profile.userId
+  }
 }
 
 export default {
@@ -53,5 +53,5 @@ export default {
   state,
   mutations,
   actions,
-  getters,
+  getters
 }

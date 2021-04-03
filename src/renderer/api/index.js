@@ -84,3 +84,12 @@ export const favTrack = (params) => {
     获取喜欢列表
 */
 export const getLikeList = () => xhr.get('/likelist')
+
+/*
+    登录
+    -phone: 手机号
+    -md5_password: md5加密密码
+*/
+export const login = params => {
+  return xhr.post('/login/cellphone', params)
+}

@@ -17,5 +17,4 @@ export const sleep = (time = 1000) => {
   })
 }
 
-
 export {formatDuring} from './filters'

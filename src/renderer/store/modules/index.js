@@ -17,3 +17,5 @@ files.keys().forEach(key => {
 // export {default as settings} from './settings'
 // export {default as snackbar} from './snackbar'
 export {default as change} from './change'
+export {default as myapp} from './myapp'
+export {default as settings} from './settings'

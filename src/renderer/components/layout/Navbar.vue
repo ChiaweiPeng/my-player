@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import {sync} from 'vuex-pathify'
 export default {
   name: 'DefaultNavbar',
   data: () => ({
@@ -106,12 +107,15 @@ export default {
     collapsed: Boolean
   },
   components: {},
+  computed: {
+    showLogin: sync('myapp/showLogin')
+  },
   methods: {
     handleTabNight (e) {
       this.isNight = !this.isNight
     },
     handleSignIn (e) {
-      console.log('sign-in')
+      this.showLogin = !this.showLogin
     },
     handleTabContent (key, link) {
       // console.log(key, link);

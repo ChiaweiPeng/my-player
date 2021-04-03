@@ -76,8 +76,8 @@ export default {
       // }
 
       // await this.$store.dispatch('change/updatemusic','沉默是金')
-      await this.$store.dispatch('change/updatePlayingList',list)
-      await this.$store.dispatch('change/updateTrack',{id:list[0].id})
+      await this.$store.dispatch('change/updatePlayingList', list)
+      await this.$store.dispatch('change/updateTrack', {id: list[0].id})
     }
   }
 }

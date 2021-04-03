@@ -76,67 +76,67 @@
 </template>
 
 <script>
-import { sync, get, dispatch, commit } from "vuex-pathify";
-import { mapGetters } from "vuex";
-import { formatDuring } from "@/utils/fn";
+import { sync, get, dispatch, commit } from 'vuex-pathify'
+import { mapGetters } from 'vuex'
+import { formatDuring } from '@/utils/fn'
 
-import Player from "./Player";
-let prevVolume = 1;
+import Player from './Player'
+let prevVolume = 1
 const PLAY_MODE = {
   CYCLE: 0,
   SINGLE_CYCLE: 1,
-  RANDOM: 2,
-};
+  RANDOM: 2
+}
 export default {
-  name: "DefaultPlaybar",
+  name: 'DefaultPlaybar',
   extends: Player,
   data: () => ({
-    liked:false
+    liked: false
   }),
   components: {},
   computed: {
-    track: get("change/track"),
-    currentTrackId: get("change/currentTrackId"),
-    playingList: get("change/playingList"),
-    playing: get("change/playing"),
-    loadAuido: get("change/loadAudio"),
+    track: get('change/track'),
+    currentTrackId: get('change/currentTrackId'),
+    playingList: get('change/playingList'),
+    playing: get('change/playing'),
+    loadAuido: get('change/loadAudio'),
     mode: sync('change/mode'),
     ...mapGetters({
       next: 'change/nextTrackId',
-      prev: 'change/prevTrackId',
+      prev: 'change/prevTrackId'
       // liked:'change/liked'
     }),
 
-    likeSong() {
-      return !this.liked ? {icon:"icon-1_music90"} :{icon:"icon-1_music90-copy"}
+    likeSong () {
+      return !this.liked ? {icon: 'icon-1_music90'} : {icon: 'icon-1_music90-copy'}
     },
-    playingState() {
+    playingState () {
       return this.playing
-        ? { icon: "icon-zanting-copy" }
-        : { icon: "icon-bofang" };
+        ? { icon: 'icon-zanting-copy' }
+        : { icon: 'icon-bofang' }
     },
-    orderIconState() {
+    orderIconState () {
       // 切换模式图标
-      return([
-        {icon:'icon-1_music84'},
-        {icon:'icon-1_music85'},
-        {icon:'icon-danquxunhuan2'}
+      return ([
+        {icon: 'icon-1_music84'},
+        {icon: 'icon-1_music85'},
+        {icon: 'icon-danquxunhuan2'}
       ])[this.mode]
     },
-    volumeIcon(){
-      return this.volume === 0 ? {icon: 'icon-yinliangxiaoyinliangxiao'} : {icon:'icon-yinliangdayinliangda'}
+    volumeIcon () {
+      return this.volume === 0 ? {icon: 'icon-yinliangxiaoyinliangxiao'} : {icon: 'icon-yinliangdayinliangda'}
     }
   },
   watch: {
-    playing(val) {
+    playing (val) {
       this.$nextTick(() => {
         if (val) {
-          this.play();
+          this.play()
         } else {
-          this.pause();
+          this.pause()
         }
-      });
-    },
+      })
+    }
   },
   // computed:{
   //   track:get('music/track'),
@@ -154,47 +154,47 @@ export default {
   //   })
   // },
   methods: {
-    onAfterPlaybarChange(val) {
-      console.log("onAfterPlaybarChange:" + val);
-      this.setSeek(val);
+    onAfterPlaybarChange (val) {
+      console.log('onAfterPlaybarChange:' + val)
+      this.setSeek(val)
     },
-    onAfterVolumeChange(val) {
-      console.log("onAfterVolumeChange:" + val);
+    onAfterVolumeChange (val) {
+      console.log('onAfterVolumeChange:' + val)
     },
-    handleClickLike(e) {
-      this.$store.dispatch('change/favSong',{id: this.id, like:!this.liked})
+    handleClickLike (e) {
+      this.$store.dispatch('change/favSong', {id: this.id, like: !this.liked})
     },
-    handleClickBackMusic(e) {
-      this.$store.dispatch('change/updateTrack',{id:this.prev})
+    handleClickBackMusic (e) {
+      this.$store.dispatch('change/updateTrack', {id: this.prev})
     },
-    handleClickForwardMuisc(e) {
-      this.$store.dispatch('change/updateTrack', {id:this.next})
+    handleClickForwardMuisc (e) {
+      this.$store.dispatch('change/updateTrack', {id: this.next})
     },
     // 播放按钮
-    handleClickStartPlay(e) {
-      commit("change/playing", !this.playing);
+    handleClickStartPlay (e) {
+      commit('change/playing', !this.playing)
     },
     // 切换播放模式
-    handleClickTabMode(e) {
-      this.mode<2 ? this.mode++ : (this.mode = 0)
+    handleClickTabMode (e) {
+      this.mode < 2 ? this.mode++ : (this.mode = 0)
     },
     // 静音切换
-    handleVolume(e) {
-      if(this.volume === 0) {
+    handleVolume (e) {
+      if (this.volume === 0) {
         this.volume = prevVolume
       } else {
         prevVolume = this.volume
         this.volume = 0
       }
     },
-    handleShowList(e) {
-      console.log(this.playingList);
+    handleShowList (e) {
+      console.log(this.playingList)
     },
-    tipFormatter(val) {
-      return formatDuring(val * 1000);
-    },
-  },
-};
+    tipFormatter (val) {
+      return formatDuring(val * 1000)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

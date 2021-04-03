@@ -14,7 +14,7 @@ export default new Vuex.Store({
   modules,
   plugins: [
     pathify.plugin,
-    createPersistedState(),
+    createPersistedState()
     // createSharedMutations()
   ],
   strict: process.env.NODE_ENV !== 'production'

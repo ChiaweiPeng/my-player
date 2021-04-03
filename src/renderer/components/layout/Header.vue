@@ -65,14 +65,15 @@ export default {
     .global-search {
       height: 30px;
       min-width: 18vw;
-      border: 1px solid transparent;
-      text-indent: 27px;
-      &:focus {
-        border-radius: 4px;
-        background-color: rgba($color: #999, $alpha: 0.5);
-        transition: 0.5s;
-        outline: none;
-      }
+      @include my-input
+      // border: 1px solid transparent;
+      // text-indent: 27px;
+      // &:focus {
+      //   border-radius: 4px;
+      //   background-color: rgba($color: #999, $alpha: 0.5);
+      //   transition: 0.5s;
+      //   outline: none;
+      // }
     }
   }
 }

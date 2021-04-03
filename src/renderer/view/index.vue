@@ -10,6 +10,7 @@
       <default-view></default-view>
     </a-layout>
 
+    <default-login></default-login>
     <default-playbar></default-playbar>
   </div>
 </template>
@@ -19,6 +20,7 @@ import DefaultHeader from '@/components/layout/Header'
 import DefaultNavbar from '@/components/layout/Navbar'
 import DefaultView from '@/components/layout/View'
 import DefaultPlaybar from '@/components/playbar/PlayBar'
+import DefaultLogin from '@/components/login'
 export default {
   name: 'Layout',
   data: () => ({
@@ -28,7 +30,8 @@ export default {
     DefaultNavbar,
     DefaultHeader,
     DefaultView,
-    DefaultPlaybar
+    DefaultPlaybar,
+    DefaultLogin
   },
   methods: {
     handleCollapsed (collapsed) {

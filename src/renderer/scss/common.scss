@@ -133,3 +133,15 @@
     height: 2px;
   }
 }
+
+// 输入框样式
+@mixin my-input {
+  border: 1px solid transparent;
+  text-indent: 27px;
+  &:focus {
+    border-radius: 4px;
+    background-color: rgba($color: #999, $alpha: 0.5);
+    transition: 0.5s;
+    outline: none;
+  }
+}
