@@ -9,5 +9,5 @@ export function formatDuring (val) {
 }
 
 export default {
-  formatDuring
+  formatDuring,
 }

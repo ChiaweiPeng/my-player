@@ -2,6 +2,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
+const cache = require('NeteaseCloudMusicApi/util/apicache').middleware
 
 // 引入netease和qq-music Api
 const netApiMap = require('./neteaseApiMap')
@@ -25,18 +26,31 @@ export const startApiServer = () => {
   })
 
   // 获取postdata数据
-  app.use(express.json())
-  app.use(express.urlencoded({extended: false}))
+  // app.use(express.json())
+  // app.use(express.urlencoded({extended: false}))
 
   // 解析cookie
-  app.use(cookieParser())
+  app.use((req, res, next) => {
+    req.cookies = {}
+    ;(req.headers.cookie || '').split(/\s*;\s*/).forEach((pair) => {
+      let crack = pair.indexOf('=')
+      if (crack < 1 || crack == pair.length - 1) return
+      req.cookies[
+        decodeURIComponent(pair.slice(0, crack)).trim()
+        ] = decodeURIComponent(pair.slice(crack + 1)).trim()
+    })
+    next()
+  })
 
   // bodyparser
-  // app.use(bodyParser.json())
-  // app.use(bodyParser.urlencoded({extended:false}))
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({extended:false}))
 
   // fileupload
   app.use(fileUpload())
+
+  // cache
+  app.use(cache('2 minutes', (req, res) => res.statusCode === 200))
 
   // netease 路由匹配
   // http://127.0.0.1:6001/api/artist-list

@@ -8,9 +8,9 @@ const mutations = make.mutations(state)
 
 const actions = {
   ...make.actions(state),
-  init: async({dispatch}) => {
-      const modules  = ['settings/fetch']
-      for(const module of modules) dispatch(module,null, {root:true})
+  init: async ({dispatch}) => {
+    const modules = ['settings/fetch']
+    for (const module of modules) dispatch(module, null, {root: true})
   }
 }
 

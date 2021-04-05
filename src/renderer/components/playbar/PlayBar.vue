@@ -91,7 +91,6 @@ export default {
   name: 'DefaultPlaybar',
   extends: Player,
   data: () => ({
-    liked: false
   }),
   components: {},
   computed: {
@@ -103,8 +102,8 @@ export default {
     mode: sync('change/mode'),
     ...mapGetters({
       next: 'change/nextTrackId',
-      prev: 'change/prevTrackId'
-      // liked:'change/liked'
+      prev: 'change/prevTrackId',
+      liked:'change/liked'
     }),
 
     likeSong () {
@@ -162,7 +161,7 @@ export default {
       console.log('onAfterVolumeChange:' + val)
     },
     handleClickLike (e) {
-      this.$store.dispatch('change/favSong', {id: this.id, like: !this.liked})
+      this.$store.dispatch('change/favSong', {id: this.track.id, like: !this.liked})
     },
     handleClickBackMusic (e) {
       this.$store.dispatch('change/updateTrack', {id: this.prev})

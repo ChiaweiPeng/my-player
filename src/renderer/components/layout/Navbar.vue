@@ -29,7 +29,8 @@
         style="cursor: initial"
         title="signin setting mode"
       >
-        <a-button
+        <default-account></default-account>
+        <!-- <a-button
           class="sign"
           type="link"
           style="padding: 0"
@@ -40,7 +41,7 @@
             style="marginright: 3px"
           ></my-icon>
           <span>sign-in</span>
-        </a-button>
+        </a-button> -->
 
         <div class="setting">
           <a-button shape="circle" size="small" title="setting">
@@ -79,7 +80,7 @@
 </template>
 
 <script>
-import {sync} from 'vuex-pathify'
+import DefaultAccount from '@/components/default/Account'
 export default {
   name: 'DefaultNavbar',
   data: () => ({
@@ -106,19 +107,16 @@ export default {
   props: {
     collapsed: Boolean
   },
-  components: {},
+  components: {
+    DefaultAccount
+  },
   computed: {
-    showLogin: sync('myapp/showLogin')
   },
   methods: {
     handleTabNight (e) {
       this.isNight = !this.isNight
     },
-    handleSignIn (e) {
-      this.showLogin = !this.showLogin
-    },
     handleTabContent (key, link) {
-      // console.log(key, link);
       this.current = key
       this.$router.push(link)
     }
@@ -144,10 +142,6 @@ export default {
     margin-bottom: 0;
     display: flex;
     justify-content: space-between;
-    .ant-btn.sign {
-      margin-top: 4px;
-      margin-left: 2px;
-    }
   }
 
   .ant-menu-item-group-title span {

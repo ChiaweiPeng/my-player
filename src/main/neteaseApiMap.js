@@ -6,8 +6,11 @@ const artist_list = require('NeteaseCloudMusicApi/module/artist_list')
 const artists = require('NeteaseCloudMusicApi/module/artists')
 
 const lyric = require('NeteaseCloudMusicApi/module/lyric')
-const login = require('NeteaseCloudMusicApi/module/login')
+// const login = require('NeteaseCloudMusicApi/module/login') 不知为啥加了单独login会参数错误
 const login_cellphone = require('NeteaseCloudMusicApi/module/login_cellphone')
+const login_refresh = require('NeteaseCloudMusicApi/module/login_refresh');
+const login_status = require('NeteaseCloudMusicApi/module/login_status');
+const logout = require('NeteaseCloudMusicApi/module/logout');
 
 const personalized = require('NeteaseCloudMusicApi/module/personalized')
 const personalized_newsong = require('NeteaseCloudMusicApi/module/personalized_newsong')
@@ -29,6 +32,8 @@ const song_url = require('NeteaseCloudMusicApi/module/song_url')
 
 const toplist = require('NeteaseCloudMusicApi/module/toplist')
 
+const user_playlist = require('NeteaseCloudMusicApi/module/user_playlist')
+
 module.exports = {
   '/artist_list': generatorFn(artist_list),
   '/artists': generatorFn(artists),
@@ -36,8 +41,10 @@ module.exports = {
   '/lyric': generatorFn(lyric),
   '/like': generatorFn(like),
   '/likelist': generatorFn(likelist),
-  '/login': generatorFn(login),
   '/login/cellphone': generatorFn(login_cellphone),
+  '/login/refresh': generatorFn(login_refresh),
+  '/login/status': generatorFn(login_status),
+  '/logout': generatorFn(logout),
 
   '/personalized': generatorFn(personalized),
   '/personalized/newsong': generatorFn(personalized_newsong),
@@ -54,34 +61,35 @@ module.exports = {
   '/song/detail': generatorFn(song_detail),
   '/song/url': generatorFn(song_url),
 
-  '/toplist': generatorFn(toplist)
+  '/toplist': generatorFn(toplist),
+
+  '/user/playlist':generatorFn(user_playlist)
 }
 
-function generatorFn (module) {
+function generatorFn(module) {
   return (req, res) => {
-    // 如果请求参数中存在cookie，将cookie转为Json格式传给api
     if (typeof req.query.cookie === 'string') {
-      req.query.cookie = cookieToJson(req.query.cookie)
+      req.query.cookie = cookieToJson(req.query.cookie);
     }
-
     let query = Object.assign(
       {},
-      { cookie: req.cookie },
+      { cookie: req.cookies },
       req.query,
       req.body,
-      req.files
-    )
-    module(query, request).then(answer => {
-      console.log('[ok]', decodeURIComponent(req.originalUrl))
-      res.append('Set-Cookie', answer.cookie)
-      res.status(answer.status).send(answer.body)
-    })
+      req.files,
+    );
+    module(query, request)
+      .then(answer => {
+        console.log('[OK]', decodeURIComponent(req.originalUrl))
+        res.append('Set-Cookie', answer.cookie)
+        res.status(answer.status).send(answer.body)
+      })
       .catch(answer => {
-        console.log('[err]', decodeURIComponent(req.originalUrl), {
+        console.log('[ERR]', decodeURIComponent(req.originalUrl), {
           status: answer.status,
-          body: answer.body
+          body: answer.body,
         })
-        if (answer.body.code === '301') answer.body.msg = '需要登录'
+        if (answer.body.code == '301') answer.body.msg = '需要登录'
         res.append('Set-Cookie', answer.cookie)
         res.status(answer.status).send(answer.body)
       })

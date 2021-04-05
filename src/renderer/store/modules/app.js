@@ -14,7 +14,7 @@ const mutations = make.mutations(state)
 const actions = {
   ...make.actions(state),
   init: async ({dispatch}) => {
-    const modules = ['settings/fetch', 'music/fetch']
+    const modules = ['settings/fetch', 'change/fetch']
     for (const module of modules) dispatch(module, null, {root: true})
   }
 }

@@ -3,8 +3,8 @@ import axios from 'axios'
 
 import App from './App'
 import router from './router'
-import store from './store'
-// import {createStore} from './store'
+// import store from './store'
+import {createStore} from './store'
 
 import '@/scss/global.scss'
 
@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 // 去除chrome控制台报错
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
-// const store = createStore()
+const store = createStore()
 /* eslint-disable no-new */
 new Vue({
   components: { App },
