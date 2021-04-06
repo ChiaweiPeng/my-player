@@ -1,7 +1,8 @@
 import { make } from 'vuex-pathify'
 
 const state = {
-  showLogin: false
+  showLogin: false,
+  showList: false
 }
 
 const mutations = make.mutations(state)

@@ -16,7 +16,7 @@ Vue.use(Antd)
 
 // 引入iconfont 并挂载到全局组件
 const MyIcon = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2430341_29lqtsq7gd.js'
+  scriptUrl: '//at.alicdn.com/t/font_2430341_g5vc9hh3q8.js'
 })
 Vue.component('MyIcon', MyIcon)
 

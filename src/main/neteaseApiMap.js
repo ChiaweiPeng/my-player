@@ -31,6 +31,7 @@ const song_detail = require('NeteaseCloudMusicApi/module/song_detail')
 const song_url = require('NeteaseCloudMusicApi/module/song_url')
 
 const toplist = require('NeteaseCloudMusicApi/module/toplist')
+const topSong = require('NeteaseCloudMusicApi/module/top_song')
 
 const user_playlist = require('NeteaseCloudMusicApi/module/user_playlist')
 
@@ -62,6 +63,7 @@ module.exports = {
   '/song/url': generatorFn(song_url),
 
   '/toplist': generatorFn(toplist),
+  '/top/song':generatorFn(topSong),
 
   '/user/playlist':generatorFn(user_playlist)
 }

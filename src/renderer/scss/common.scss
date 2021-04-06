@@ -12,7 +12,7 @@
     color: $main-text-color;
     line-height: 2rem;
     letter-spacing: 0.0125em !important;
-    font-family: "Roboto", sans-serif !important;
+    // font-family: "Roboto", sans-serif !important;
     margin-bottom: 0.6rem;
 }
 
@@ -144,4 +144,11 @@
     transition: 0.5s;
     outline: none;
   }
+}
+
+// 省略字数
+@mixin letter-overflow{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

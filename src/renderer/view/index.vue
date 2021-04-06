@@ -31,7 +31,7 @@ export default {
     DefaultHeader,
     DefaultView,
     DefaultPlaybar,
-    DefaultLogin
+    DefaultLogin,
   },
   methods: {
     handleCollapsed (collapsed) {

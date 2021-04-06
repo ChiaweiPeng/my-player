@@ -3,7 +3,7 @@
     <a-row>
       <a-col :span="14">
         <div class="big-ban">
-          <div class="title">New Release</div>
+          <div class="title">新碟上架</div>
           <a-card :bordered="false" hoverable>
             <div
               class="ban-img"
@@ -13,13 +13,15 @@
                 <p class="ban-artist">{{ release.company }}</p>
                 <p class="ban-title">{{ release.name }}</p>
                 <div class="btn-area">
-                  <a-button class="btn-play" shape="round">
+                  <a-button class="btn-play" shape="round" @click="clickNewRelease(release)">
                     <my-icon type="icon-bofang"></my-icon>
                     NOW PLAYING</a-button
                   >
-                  <a-button class="btn-like" shape="circle"
-                    ><my-icon type="icon-xihuan1"></my-icon
-                  ></a-button>
+                  <a-button class="btn-like" shape="circle" @click="clickLikeNew(release)"
+                    >
+                    <my-icon type="icon-xihuan1" v-if="!liked"></my-icon>
+                    <my-icon type="icon-xihuan2" v-else></my-icon>
+                  </a-button>
                 </div>
               </div>
             </div>
@@ -27,7 +29,7 @@
         </div>
 
         <div class="recm-mv">
-          <div class="title">Recommend Music Video</div>
+          <div class="title">推荐MV</div>
           <a-row>
             <a-col :span="12" v-for="item of mvs" :key="item.id">
               <video-cover :video="item" />
@@ -38,7 +40,7 @@
 
       <a-col :span="10">
         <div class="hot-albums">
-          <div class="title">Hot albums</div>
+          <div class="title">热门歌单</div>
           <a-row>
             <a-col :span="12" v-for="item of playLists" :key="item.id">
               <album-cover :data="item"  type="playlist"/>
@@ -54,7 +56,8 @@
 <script>
 import VideoCover from '@/components/default/VideoCover'
 import AlbumCover from '@/components/default/AlbumCover'
-import { getPersonalized, newAlbums, getMv } from '@/api'
+import { getPersonalized, newAlbums, getMv,getAlbum } from '@/api'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Discover',
   data: () => ({
@@ -70,7 +73,7 @@ export default {
     try {
       const [playlists, { albums }, { result: mvs }] = await Promise.all([
         getPersonalized(),
-        newAlbums({ limit: 1, area: 'EA' }),
+        newAlbums({ limit: 1, area: 'ZH' }),
         getMv()
       ])
       this.playLists = playlists.result.slice(0, 6)
@@ -78,6 +81,29 @@ export default {
       this.mvs = mvs
     } catch (e) {
       console.log(e)
+    }
+  },
+  computed:{
+    ...mapGetters({
+      liked:"change/liked"
+    }),
+    likedSong(){
+      return !this.liked  ? {icon:"icon-xihuan1"} : {icon:"icon-xihuan2"}
+    }
+  },
+  methods:{
+    async clickNewRelease(release){
+      const data = await getAlbum(release.id)
+      // console.log(data.songs[0])
+      this.$store.dispatch('change/updateTrack',data.songs[0])
+    },
+    async clickLikeNew(release){
+      // this.liked = !this.liked
+      const data = await getAlbum(release.id)
+      this.$store.dispatch('change/favSong', {
+        id: data.songs[0].id,
+        like: !this.liked
+      })
     }
   }
 }
@@ -165,9 +191,7 @@ export default {
       font-size: 0.75rem;
       font-weight: 400;
       letter-spacing: 0.0333333333em;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
+      @include letter-overflow
     }
   }
 }

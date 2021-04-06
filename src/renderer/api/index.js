@@ -19,6 +19,13 @@ export const newAlbums = (params) => {
   })
 }
 
+/* 
+    新歌速递
+*/
+export const topSong = type => {
+    return xhr.get(`/top/song?type=${type}`)
+}
+
 /**
  * 获取推荐mv
  */

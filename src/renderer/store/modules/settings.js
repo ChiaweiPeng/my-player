@@ -12,7 +12,7 @@ const state = () => {
     autoCache: false,
     theme: 'auto',
     volume: 0.8,
-    account: {},
+    account: {}
   }, data)
 }
 

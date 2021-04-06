@@ -75,7 +75,9 @@ export default {
       commit('playing', false)
       commit('loadAudio', true)
       // await sleep()
+      console.log(id)
       const track = await getTrackDetail(id,rootGetters['settings/logged'])
+      console.log(track)
       if (option.resetProgress) {
         commit('currentTime', 0)
       }

@@ -32,7 +32,6 @@ export default {
   components: {},
   computed: {
     showLogin: sync("myapp/showLogin"),
-    isLogin: sync("settings/isLogin"),
     profile: get("settings/account@profile"),
     logged: (vm) => vm.$store.getters["settings/logged"],
   },
