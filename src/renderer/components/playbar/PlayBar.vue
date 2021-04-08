@@ -14,15 +14,15 @@
       <div class="playbar-left">
         <div class="song-img">
           <a-avatar shape="square" :size="40" :src="`${track.picUrl? track.picUrl : track.al.picUrl}`" />
-          <a-button type="square" size="large" class="tab-big">
+          <a-button type="square" size="large" class="tab-big" @click="handleShowLyric">
             <my-icon type="icon-zhankai"></my-icon>
           </a-button>
         </div>
 
         <div class="song-info">
-          <a href="" class="song-name">{{ track.name }}</a>
+          <a href="javascript:;" class="song-name">{{ track.name }}</a>
           <span class="text-dash">-</span>
-          <a href="" class="song-artist">{{ track.artist? track.artist : track.ar[0].name }}</a>
+          <router-link :to="`/artist/${track.ar[0].id}`" class="song-artist">{{ track.artist? track.artist : track.ar[0].name }}</router-link>
         </div>
       </div>
       <div class="playbar-center">
@@ -55,19 +55,10 @@
             @afterChange="onAfterVolumeChange"
             v-model="volume"
             :max="1"
-            :step="0.1"
+            :step="0.01"
           ></a-slider>
         </div>
-
-        <!-- <a-popover title="播放列表" trigger="click" placement="bottomRight">
-          <template slot="content">
-            <p>Content</p>
-            <p>Content</p>
-          </template>
-          <a-button shape="circle" size="large" @click="handleShowList">
-            <my-icon type="icon-playlist"></my-icon>
-          </a-button>
-        </a-popover> -->
+        
         <playing-list></playing-list>
       </div>
     </div>
@@ -75,135 +66,125 @@
 </template>
 
 <script>
-import { sync, get, dispatch, commit } from "vuex-pathify";
-import { mapGetters } from "vuex";
-import { formatDuring } from "@/utils/fn";
+import { sync, get, dispatch, commit } from 'vuex-pathify'
+import { mapGetters } from 'vuex'
+import { formatDuring } from '@/utils/fn'
 
-import Player from "./Player";
+import Player from './Player'
 import PlayingList from '@/components/default/PlayingList'
-let prevVolume = 1;
+let prevVolume = 1
 const PLAY_MODE = {
   CYCLE: 0,
   SINGLE_CYCLE: 1,
-  RANDOM: 2,
-};
+  RANDOM: 2
+}
 export default {
-  name: "DefaultPlaybar",
+  name: 'DefaultPlaybar',
   extends: Player,
   data: () => ({}),
   components: {
     PlayingList
   },
   computed: {
-    track: get("change/track"),
-    currentTrackId: get("change/currentTrackId"),
-    playingList: get("change/playingList"),
-    playing: get("change/playing"),
-    loadAuido: get("change/loadAudio"),
-    mode: sync("change/mode"),
-    showList: sync("myapp/showList"),
+    track: get('change/track'),
+    currentTrackId: get('change/currentTrackId'),
+    playingList: get('change/playingList'),
+    playing: get('change/playing'),
+    loadAuido: get('change/loadAudio'),
+    mode: sync('change/mode'),
+    showList: sync('myapp/showList'),
+    showLyricPage: sync('myapp/showLyricPage'),
+    seek: sync('change/seek'),
     ...mapGetters({
-      next: "change/nextTrackId",
-      prev: "change/prevTrackId",
-      liked: "change/liked",
+      next: 'change/nextTrackId',
+      prev: 'change/prevTrackId',
+      liked: 'change/liked'
     }),
 
-    likeSong() {
+    likeSong () {
       return !this.liked
-        ? { icon: "icon-1_music90" }
-        : { icon: "icon-1_music90-copy" };
+        ? { icon: 'icon-1_music90' }
+        : { icon: 'icon-1_music90-copy' }
     },
-    playingState() {
+    playingState () {
       return this.playing
-        ? { icon: "icon-zanting-copy" }
-        : { icon: "icon-bofang" };
+        ? { icon: 'icon-zanting-copy' }
+        : { icon: 'icon-bofang' }
     },
-    orderIconState() {
+    orderIconState () {
       // 切换模式图标
       return [
-        { icon: "icon-1_music84" },
-        { icon: "icon-1_music85" },
-        { icon: "icon-danquxunhuan2" },
-      ][this.mode];
+        { icon: 'icon-1_music84' },
+        { icon: 'icon-1_music85' },
+        { icon: 'icon-danquxunhuan2' }
+      ][this.mode]
     },
-    volumeIcon() {
+    volumeIcon () {
       return this.volume === 0
-        ? { icon: "icon-yinliangxiaoyinliangxiao" }
-        : { icon: "icon-yinliangdayinliangda" };
-    },
+        ? { icon: 'icon-yinliangxiaoyinliangxiao' }
+        : { icon: 'icon-yinliangdayinliangda' }
+    }
   },
   watch: {
-    playing(val) {
+    playing (val) {
       this.$nextTick(() => {
         if (val) {
-          this.play();
+          this.play()
         } else {
-          this.pause();
+          this.pause()
         }
-      });
-    },
+      })
+    }
   },
-  // computed:{
-  //   track:get('music/track'),
-  //   currentTrackId: get('music/currentTrackId'),
-  //   playingList: get('music/playingList'),
-  //   playing: get('music/playing'),
-  //   loadAudio: sync('music/loadAudio'),
-  //   showList: sync('music/showList'),
-  //   showLyricsPage: sync('music/showLyricsPage'),
-  //   mode: sync('music/mode'),
-  //   ...mapGetters({
-  //     next: 'music/nextTrackId',
-  //     prev:'music/prevTrackId',
-  //     liked: 'music/liked'
-  //   })
-  // },
   methods: {
-    onAfterPlaybarChange(val) {
-      console.log("onAfterPlaybarChange:" + val);
-      this.setSeek(val);
+    handleShowLyric(e){
+      this.showLyricPage = !this.showLyricPage
     },
-    onAfterVolumeChange(val) {
-      console.log("onAfterVolumeChange:" + val);
+    onAfterPlaybarChange (val) {
+      // console.log('onAfterPlaybarChange:' + val)
+      this.setSeek(val)
     },
-    handleClickLike(e) {
-      this.$store.dispatch("change/favSong", {
+    onAfterVolumeChange (val) {
+      console.log('onAfterVolumeChange:' + val)
+    },
+    handleClickLike (e) {
+      this.$store.dispatch('change/favSong', {
         id: this.track.id,
-        like: !this.liked,
-      });
+        like: !this.liked
+      })
     },
-    handleClickBackMusic(e) {
-      this.$store.dispatch("change/updateTrack", { id: this.prev });
+    handleClickBackMusic (e) {
+      this.$store.dispatch('change/updateTrack', { id: this.prev })
     },
-    handleClickForwardMuisc(e) {
-      this.$store.dispatch("change/updateTrack", { id: this.next });
+    handleClickForwardMuisc (e) {
+      this.$store.dispatch('change/updateTrack', { id: this.next })
     },
     // 播放按钮
-    handleClickStartPlay(e) {
-      commit("change/playing", !this.playing);
+    handleClickStartPlay (e) {
+      commit('change/playing', !this.playing)
     },
     // 切换播放模式
-    handleClickTabMode(e) {
-      this.mode < 2 ? this.mode++ : (this.mode = 0);
+    handleClickTabMode (e) {
+      this.mode < 2 ? this.mode++ : (this.mode = 0)
     },
     // 静音切换
-    handleVolume(e) {
+    handleVolume (e) {
       if (this.volume === 0) {
-        this.volume = prevVolume;
+        this.volume = prevVolume
       } else {
-        prevVolume = this.volume;
-        this.volume = 0;
+        prevVolume = this.volume
+        this.volume = 0
       }
     },
-    handleShowList(e) {
+    handleShowList (e) {
       // console.log(this.playingList)
-      this.showList = !this.showList;
+      this.showList = !this.showList
     },
-    tipFormatter(val) {
-      return formatDuring(val * 1000);
-    },
-  },
-};
+    tipFormatter (val) {
+      return formatDuring(val * 1000)
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

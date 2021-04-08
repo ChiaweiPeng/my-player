@@ -4,13 +4,14 @@ const { cookieToJson } = require('NeteaseCloudMusicApi/util/index')
 // 网易api接口匹配
 const artist_list = require('NeteaseCloudMusicApi/module/artist_list')
 const artists = require('NeteaseCloudMusicApi/module/artists')
+const artist_album = require('NeteaseCloudMusicApi/module/artist_album')
 
 const lyric = require('NeteaseCloudMusicApi/module/lyric')
 // const login = require('NeteaseCloudMusicApi/module/login') 不知为啥加了单独login会参数错误
 const login_cellphone = require('NeteaseCloudMusicApi/module/login_cellphone')
-const login_refresh = require('NeteaseCloudMusicApi/module/login_refresh');
-const login_status = require('NeteaseCloudMusicApi/module/login_status');
-const logout = require('NeteaseCloudMusicApi/module/logout');
+const login_refresh = require('NeteaseCloudMusicApi/module/login_refresh')
+const login_status = require('NeteaseCloudMusicApi/module/login_status')
+const logout = require('NeteaseCloudMusicApi/module/logout')
 
 const personalized = require('NeteaseCloudMusicApi/module/personalized')
 const personalized_newsong = require('NeteaseCloudMusicApi/module/personalized_newsong')
@@ -26,18 +27,23 @@ const like = require('NeteaseCloudMusicApi/module/like')
 const likelist = require('NeteaseCloudMusicApi/module/likelist')
 
 const mv_first = require('NeteaseCloudMusicApi/module/mv_first')
+const mv_detail = require('NeteaseCloudMusicApi/module/mv_detail')
+const mv_url = require('NeteaseCloudMusicApi/module/mv_url')
+const simi_mv = require('NeteaseCloudMusicApi/module/simi_mv')
 
 const song_detail = require('NeteaseCloudMusicApi/module/song_detail')
 const song_url = require('NeteaseCloudMusicApi/module/song_url')
 
 const toplist = require('NeteaseCloudMusicApi/module/toplist')
 const topSong = require('NeteaseCloudMusicApi/module/top_song')
+const top_playlist = require('NeteaseCloudMusicApi/module/top_playlist')
 
 const user_playlist = require('NeteaseCloudMusicApi/module/user_playlist')
 
 module.exports = {
   '/artist_list': generatorFn(artist_list),
   '/artists': generatorFn(artists),
+  '/artist/album':generatorFn(artist_album),
 
   '/lyric': generatorFn(lyric),
   '/like': generatorFn(like),
@@ -58,28 +64,32 @@ module.exports = {
   '/album': generatorFn(album),
 
   '/mv/first': generatorFn(mv_first),
+  '/mv/detail': generatorFn(mv_detail),
+  '/mv/url': generatorFn(mv_url),
+  '/simi/mv': generatorFn(simi_mv),
 
   '/song/detail': generatorFn(song_detail),
   '/song/url': generatorFn(song_url),
 
   '/toplist': generatorFn(toplist),
-  '/top/song':generatorFn(topSong),
+  '/top/song': generatorFn(topSong),
+  '/top/playlist': generatorFn(top_playlist),
 
-  '/user/playlist':generatorFn(user_playlist)
+  '/user/playlist': generatorFn(user_playlist)
 }
 
-function generatorFn(module) {
+function generatorFn (module) {
   return (req, res) => {
     if (typeof req.query.cookie === 'string') {
-      req.query.cookie = cookieToJson(req.query.cookie);
+      req.query.cookie = cookieToJson(req.query.cookie)
     }
     let query = Object.assign(
       {},
       { cookie: req.cookies },
       req.query,
       req.body,
-      req.files,
-    );
+      req.files
+    )
     module(query, request)
       .then(answer => {
         console.log('[OK]', decodeURIComponent(req.originalUrl))
@@ -89,7 +99,7 @@ function generatorFn(module) {
       .catch(answer => {
         console.log('[ERR]', decodeURIComponent(req.originalUrl), {
           status: answer.status,
-          body: answer.body,
+          body: answer.body
         })
         if (answer.body.code == '301') answer.body.msg = '需要登录'
         res.append('Set-Cookie', answer.cookie)

@@ -6,7 +6,7 @@
       <div class="container">
         <a-row>
           <a-col :span="4" v-for="item of newRelease" :key="item.id">
-            <album-cover :data="item" type='playlist'/>
+            <album-cover :data="item" type='album'/>
           </a-col>
         </a-row>
       </div>

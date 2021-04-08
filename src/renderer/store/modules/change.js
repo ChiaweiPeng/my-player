@@ -1,5 +1,5 @@
 import {getTrackDetail} from '@/api/music'
-import { getLikeList,favTrack } from '@/api'
+import { getLikeList, favTrack } from '@/api'
 import { getUserPlaylist} from '@/api/user'
 import { dispatch, make } from 'vuex-pathify'
 import {sleep} from '@/utils/fn'
@@ -18,10 +18,12 @@ const state = {
   track: {},
   currentTrackId: localStorage.getItem('currentTackId'),
   currentTime: localStorage.getItem('currentTime'),
-  playingList: [],
+  playingList: localStorage.getItem('playingList'),
+  playlist:[],
   mode: PLAY_MODE.CYCLE,
   volume: 0.8,
   likes: [],
+  seek:0
 }
 
 export default {
@@ -45,7 +47,7 @@ export default {
       const index = getters['index']
       return state.playingList[index === 0 ? (state.playingList.length - 1) : index - 1].id
     },
-    liked: (state) => !!state.likes.find(i => i === state.track.id),
+    liked: (state) => !!state.likes.find(i => i === state.track.id)
   },
   mutations: {
     ...make.mutations(state),
@@ -54,16 +56,16 @@ export default {
     }
   },
   actions: {
-    async fetch({commit, rootGetters}){
-        if(rootGetters['settings/logged']){
-            // 获得当前用户推荐歌单
-            const [likesRes, playlistRes] = await Promise.all([getLikeList(), getUserPlaylist({
-                timestamp: new Date().getTime(),
-                uid:rootGetters['settings/userId']
-            })])
-            commit('likes',likesRes.ids)
-            commit('playlist', playlistRes.playlist)
-        }
+    async fetch ({commit, rootGetters}) {
+      if (rootGetters['settings/logged']) {
+        // 获得当前用户推荐歌单
+        const [likesRes, playlistRes] = await Promise.all([getLikeList(), getUserPlaylist({
+          timestamp: new Date().getTime(),
+          uid: rootGetters['settings/userId']
+        })])
+        commit('likes', likesRes.ids)
+        commit('playlist', playlistRes.playlist)
+      }
     },
     updatePlayingList ({commit}, list) {
       localStorage.setItem('playingList', JSON.stringify(list))
@@ -75,8 +77,8 @@ export default {
       commit('playing', false)
       commit('loadAudio', true)
       // await sleep()
-      console.log(id)
-      const track = await getTrackDetail(id,rootGetters['settings/logged'])
+      // console.log(id)
+      const track = await getTrackDetail(id, rootGetters['settings/logged'])
       console.log(track)
       if (option.resetProgress) {
         commit('currentTime', 0)
@@ -101,16 +103,16 @@ export default {
     },
     async favSong ({rootGetters, commit, dispatch, state}, {id, like}) {
       let likes = state.likes
-      if(!rootGetters['settings/logged']){
+      if (!rootGetters['settings/logged']) {
         message.warning('需要登录，请先登录')
       } else {
-        await favTrack({id,like})
-        if(like){
+        await favTrack({id, like})
+        if (like) {
           likes.push(id)
-        } else{
+        } else {
           likes = likes.filter(i => i !== id)
         }
-        commit('likes',likes)
+        commit('likes', likes)
       }
     }
   }

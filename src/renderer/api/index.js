@@ -19,11 +19,11 @@ export const newAlbums = (params) => {
   })
 }
 
-/* 
+/*
     新歌速递
 */
 export const topSong = type => {
-    return xhr.get(`/top/song?type=${type}`)
+  return xhr.get(`/top/song?type=${type}`)
 }
 
 /**
@@ -60,6 +60,11 @@ export const getAlbum = id => xhr.get('/album', {params: {id}})
     获取歌手详情
 */
 export const getArtist = id => xhr.get(`/artists?id=${id}`)
+
+/* 
+  获取歌手专辑
+*/
+export const getArtistAlbum = id => xhr.get(`/artist/album?id=${id}`)
 
 /*
     获取歌词
@@ -99,3 +104,43 @@ export const getLikeList = () => xhr.get('/likelist')
 export const login = params => {
   return xhr.post('/login/cellphone', params)
 }
+
+/*
+** MV相关
+
+** 获取mv数据
+*/
+export const mvDetail = mvid => {
+  return xhr.get('/mv/detail', {
+    params: {
+      mvid,
+      timestamp: new Date().getTime()
+    }
+  })
+}
+
+/*
+    mv地址
+*/
+export const mvUrl = params => {
+  return xhr.get('/mv/url', {
+    params
+  })
+}
+
+/*
+    相关mv
+*/
+export const simiMv = mvid => {
+  return xhr.get('/simi/mv', {
+    params: {
+      mvid
+    }
+  })
+}
+
+/*
+    根据歌单类型获取推荐歌单
+*/
+export const getTopPlaylist = (params = {limit: 20, cat: '全部', offset: 0}) =>
+  xhr.get('/top/playlist', {params})

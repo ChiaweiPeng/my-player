@@ -1,17 +1,23 @@
 <template>
   <div class="video-cover">
-    <div
-      class="video-img"
-      :style="`background-image: url('${
-        video.picUrl || video.cover ? video.picUrl || video.cover : defaultCover
-      }')`"
-    >
-      <a-button shape="circle"><my-icon type="icon-bofang"></my-icon></a-button>
-    </div>
+    <router-link :to="`/musicvideo/${video.id}`">
+      <div
+        class="video-img"
+        :style="`background-image: url('${
+          video.picUrl || video.cover
+            ? video.picUrl || video.cover
+            : defaultCover
+        }')`"
+      >
+        <a-button shape="circle"
+          ><my-icon type="icon-bofang"></my-icon
+        ></a-button>
+      </div>
+    </router-link>
 
     <div class="video-info">
       <p class="video-title">{{ video.name }}</p>
-      <span class="video-artist">{{ video.artistName }} ·</span>
+      <router-link class="video-artist" :to="'/artist/' + video.artistId">{{ video.artistName }}</router-link> · 
       <span class="video-num">{{ video.playCount }} Views</span>
     </div>
   </div>
@@ -26,7 +32,9 @@ export default {
   props: {
     video: Object
   },
-  components: {}
+  components: {},
+  methods: {
+  }
 }
 </script>
 
@@ -41,8 +49,8 @@ export default {
   .video-title {
     @include box-title;
   }
-  .video-artist {
-    color: $theme-color;
-  }
+  // .video-artist {
+  //   color: $theme-color;
+  // }
 }
 </style>

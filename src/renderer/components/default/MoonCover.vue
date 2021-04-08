@@ -1,7 +1,7 @@
 <template>
-  <div class="moon-cover" :style="`border-left-color: ${moon.color}`">
-    <span class="type-name">{{ moon.name }}</span>
-  </div>
+  <router-link :to="`/moods_genres/${moon.name}`" class="moon-cover" :style="`border-left-color: ${moon.color};color:#333`">
+      <span class="type-name">{{ moon.name }}</span>
+  </router-link >
 </template>
 
 <script>
@@ -18,10 +18,9 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/global";
 .moon-cover {
-  height: 36px;
+  display:block; 
   line-height: 36px;
-  min-width: 64px;
-  padding: 0 16px;
+  padding-left:17px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 6px;
   border-left: 6px solid;

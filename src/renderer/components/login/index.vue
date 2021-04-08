@@ -27,46 +27,46 @@
 </template>
 
 <script>
-import { sync } from "vuex-pathify";
-import { login } from "@/api";
-import md5 from "md5";
+import { sync } from 'vuex-pathify'
+import { login } from '@/api'
+import md5 from 'md5'
 export default {
-  name: "DefaultLogin",
+  name: 'DefaultLogin',
   data: () => ({
-    phone: "",
-    password: "",
-    loading: false,
+    phone: '',
+    password: '',
+    loading: false
   }),
   computed: {
-    showLogin: sync("myapp/showLogin"),
+    showLogin: sync('myapp/showLogin')
   },
   methods: {
-    login() {
-      this.loading = true;
+    login () {
+      this.loading = true
       login({
-        phone: this.phone.replace(/\s/g, ""),
+        phone: this.phone.replace(/\s/g, ''),
         md5_password: md5(this.password).toString(),
-        countrycode: "86",
+        countrycode: '86'
       })
         .then(({ code, profile, token }) => {
           if (code !== 502) {
-            this.$store.dispatch('settings/updateAccount', { profile, token });
-            this.showLogin = false;
+            this.$store.dispatch('settings/updateAccount', { profile, token })
+            this.showLogin = false
             this.$message.success('登录成功，欢迎您朋友')
-            location.reload();
+            location.reload()
           } else {
             this.$message.error('手机号或密码错误')
           }
         })
         .finally(() => {
-          this.loading = false;
-        });
+          this.loading = false
+        })
     },
-    handleCancel(e) {
-      this.showLogin = false;
-    },
-  },
-};
+    handleCancel (e) {
+      this.showLogin = false
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

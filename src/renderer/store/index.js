@@ -24,10 +24,10 @@ export const createStore = () => {
   const store = new Vuex.Store({
     plugins: [
       pathify.plugin,
-      createPersistedState(),
+      createPersistedState()
       // createSharedMutations()
     ],
-    modules,
+    modules
     // strict: process.env.NODE_ENV !== 'production',
   })
   store.subscribe(mutation => {

@@ -8,13 +8,13 @@
         title="Back Forward Fresh"
       >
         <div class="btn-tab">
-          <a-button shape="circle" size="small">
+          <a-button shape="circle" size="small" @click="$router.go(-1)">
             <my-icon type="icon-calendar-arrow-left" />
           </a-button>
-          <a-button shape="circle" size="small">
+          <a-button shape="circle" size="small" @click="$router.go(1)">
             <my-icon type="icon-calendar-arrow-right" />
           </a-button>
-          <a-button shape="circle" size="small">
+          <a-button shape="circle" size="small" @click="handleReload">
             <my-icon
               type="icon-reload"
               style="fontsize: 1rem; fontwight: 700"
@@ -119,6 +119,9 @@ export default {
     handleTabContent (key, link) {
       this.current = key
       this.$router.push(link)
+    },
+    handleReload (e) {
+      location.reload()
     }
   }
 }

@@ -1,29 +1,29 @@
 <template>
   <div class="album-cover">
-    <div class="album-img" :style="`background-image: url('${coverBgUrl}')`">
-      <div class="btn-area">
-        <a-button class="al-play" shape="circle" @click="play"
-          ><my-icon type="icon-bofang"></my-icon
-        ></a-button>
+    <router-link :to="to">
+      <div class="album-img" :style="`background-image: url('${coverBgUrl}')`">
+        <div class="btn-area">
+          <a-button class="al-play" shape="circle" @click="play"
+            ><my-icon type="icon-bofang"></my-icon
+          ></a-button>
 
-        <!-- <a-button class="al-content" shape="circle" @click="playlist"
-          ><my-icon type="icon-shenglve"></my-icon
-        ></a-button> -->
-
-        <a-popover title="播放列表" trigger="click" placement="leftBottom">
-          <template slot="content">
-            <song-bar :playingList="playingList"></song-bar>
-          </template>
-          <a-button class="al-content" shape="circle" @click="handleShowList">
-            <my-icon type="icon-shenglve"></my-icon>
-          </a-button>
-        </a-popover>
+          <a-popover title="播放列表" trigger="click" placement="leftBottom">
+            <template slot="content">
+              <song-bar
+                :playingList="playingList"
+                :overflow="'auto'"
+              ></song-bar>
+            </template>
+            <a-button class="al-content" shape="circle" @click="handleShowList">
+              <my-icon type="icon-shenglve"></my-icon>
+            </a-button>
+          </a-popover>
+        </div>
       </div>
-    </div>
-    <p class="album-name">
-      <!-- <router-link to="/"> -->
-      <a :href="data.link">{{ data.name }}</a>
-      <!-- </router-link> -->
+    </router-link>
+
+    <p class="album-name" v-if="showTitle">
+      <router-link :to="to">{{ data.name }}</router-link>
     </p>
   </div>
 </template>
@@ -31,13 +31,13 @@
 <script>
 import { getPlayList, getAlbum, getArtist } from "@/api";
 import { dispatch, sync } from "vuex-pathify";
-import SongBar from './SongBar'
-import { mapState } from 'vuex';
+import SongBar from "./SongBar";
+import { mapState } from "vuex";
 export default {
   name: "AlbumCover",
   data: () => ({
     // defaultCover: require("@/assets/default-cover.jpg"),
-    playingList: []
+    playingList: [],
   }),
   props: {
     data: {
@@ -54,9 +54,13 @@ export default {
       type: String,
       default: "album",
     },
+    showTitle: {
+      type: Boolean,
+      default: true,
+    },
   },
   components: {
-    SongBar
+    SongBar,
   },
   computed: {
     coverBgUrl() {
@@ -64,15 +68,19 @@ export default {
     },
     service() {
       return {
-        'album': getAlbum,
-        'playlist': getPlayList,
-        'artist': getArtist,
+        album: getAlbum,
+        playlist: getPlayList,
+        artist: getArtist,
+      }[this.type];
+    },
+    to() {
+      return {
+        album: `/album/${this.data.id}`,
+        playlist: `/playlist/${this.data.id}`,
+        artist: `/artist/${this.data.id}`,
       }[this.type];
     },
     showList: sync("myapp/showList"),
-    // ...mapState({
-    //   playingList: (state) => state.change.playingList
-    // })
   },
   methods: {
     async play() {
@@ -80,7 +88,6 @@ export default {
       let list = [];
       if (this.type === "album") {
         list = data.songs;
-        console.log(list)
       } else if (this.type === "playlist") {
         list = data.playlist.tracks;
       } else {
@@ -88,11 +95,10 @@ export default {
       }
       await this.$store.dispatch("change/updatePlayingList", list);
       await this.$store.dispatch("change/updateTrack", { id: list[0].id });
-      
     },
-    async handleShowList(){
-      this.showList = !this.showList
-      
+    async handleShowList() {
+      this.showList = !this.showList;
+
       const data = await this.service(this.data.id);
       let list = [];
       if (this.type === "album") {
@@ -103,9 +109,8 @@ export default {
         list = data.list;
       }
 
-      this.playingList = list
-      console.log(this.playingList)
-    }
+      this.playingList = list;
+    },
   },
 };
 </script>

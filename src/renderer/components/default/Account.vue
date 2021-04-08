@@ -25,26 +25,26 @@
 </template>
 
 <script>
-import { get, sync,dispatch } from "vuex-pathify";
+import { get, sync, dispatch } from 'vuex-pathify'
 export default {
-  name: "DefaultAccount",
+  name: 'DefaultAccount',
   data: () => ({}),
   components: {},
   computed: {
-    showLogin: sync("myapp/showLogin"),
-    profile: get("settings/account@profile"),
-    logged: (vm) => vm.$store.getters["settings/logged"],
+    showLogin: sync('myapp/showLogin'),
+    profile: get('settings/account@profile'),
+    logged: (vm) => vm.$store.getters['settings/logged']
   },
   methods: {
-    handleSignIn(e) {
-      this.showLogin = !this.showLogin;
+    handleSignIn (e) {
+      this.showLogin = !this.showLogin
     },
-    handleSignOut(e) {
-      dispatch('settings/signOut');
+    handleSignOut (e) {
+      dispatch('settings/signOut')
       location.reload()
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

@@ -56,7 +56,7 @@
 <script>
 import VideoCover from '@/components/default/VideoCover'
 import AlbumCover from '@/components/default/AlbumCover'
-import { getPersonalized, newAlbums, getMv,getAlbum } from '@/api'
+import { getPersonalized, newAlbums, getMv, getAlbum } from '@/api'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Discover',
@@ -73,31 +73,31 @@ export default {
     try {
       const [playlists, { albums }, { result: mvs }] = await Promise.all([
         getPersonalized(),
-        newAlbums({ limit: 1, area: 'ZH' }),
+        newAlbums({ limit: 2, area: 'EA' }),
         getMv()
       ])
       this.playLists = playlists.result.slice(0, 6)
-      this.release = albums[0]
+      this.release = albums[1]
       this.mvs = mvs
     } catch (e) {
       console.log(e)
     }
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      liked:"change/liked"
+      liked: 'change/liked'
     }),
-    likedSong(){
-      return !this.liked  ? {icon:"icon-xihuan1"} : {icon:"icon-xihuan2"}
+    likedSong () {
+      return !this.liked ? {icon: 'icon-xihuan1'} : {icon: 'icon-xihuan2'}
     }
   },
-  methods:{
-    async clickNewRelease(release){
+  methods: {
+    async clickNewRelease (release) {
       const data = await getAlbum(release.id)
       // console.log(data.songs[0])
-      this.$store.dispatch('change/updateTrack',data.songs[0])
+      this.$store.dispatch('change/updateTrack', data.songs[0])
     },
-    async clickLikeNew(release){
+    async clickLikeNew (release) {
       // this.liked = !this.liked
       const data = await getAlbum(release.id)
       this.$store.dispatch('change/favSong', {

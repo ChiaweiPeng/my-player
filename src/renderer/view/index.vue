@@ -10,6 +10,16 @@
       <default-view></default-view>
     </a-layout>
 
+    <a-drawer
+      placement="bottom"
+      height="100%"
+      :closable="false"
+      :visible="showLyricPage"
+      @close="drawerClose"
+    > 
+      <drawer-content></drawer-content>
+    </a-drawer>
+
     <default-login></default-login>
     <default-playbar></default-playbar>
   </div>
@@ -21,6 +31,8 @@ import DefaultNavbar from '@/components/layout/Navbar'
 import DefaultView from '@/components/layout/View'
 import DefaultPlaybar from '@/components/playbar/PlayBar'
 import DefaultLogin from '@/components/login'
+import DrawerContent from '@/components/drawer/DrawerContent'
+import {sync} from 'vuex-pathify'
 export default {
   name: 'Layout',
   data: () => ({
@@ -32,10 +44,17 @@ export default {
     DefaultView,
     DefaultPlaybar,
     DefaultLogin,
+    DrawerContent
+  },
+  computed:{
+    showLyricPage: sync('myapp/showLyricPage'),
   },
   methods: {
     handleCollapsed (collapsed) {
       this.collapsed = collapsed
+    },
+    drawerClose(){
+      this.showLyricPage = !this.showLyricPage
     }
   }
 }

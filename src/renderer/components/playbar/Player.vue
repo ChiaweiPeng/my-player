@@ -39,7 +39,7 @@ export default {
         preload: 'metadata',
         format: ['mp3', 'flac'],
         onplay: () => {
-          console.log(src)
+          // console.log(src)
           requestAnimationFrame(this.step)
         },
         onseek: () => {
@@ -70,6 +70,7 @@ export default {
     },
     runProgress () {
       this.currentTime = Math.ceil(this.howler.seek())
+      // console.log(this.currentTime)
     },
     setSeek (val) {
       this.howler.seek(val)

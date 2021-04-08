@@ -5,7 +5,7 @@
     placement="bottomRight"
   >
     <template slot="content">
-      <song-bar :playingList="playingList"></song-bar>
+      <song-bar :playingList="playingList" :overflow="'auto'"></song-bar>
     </template>
     <a-button shape="circle" size="large" @click="handleShowList">
       <my-icon type="icon-playlist"></my-icon>
@@ -14,30 +14,30 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import { sync } from "vuex-pathify";
-import SongBar from "./SongBar";
+import { mapState } from 'vuex'
+import { sync } from 'vuex-pathify'
+import SongBar from './SongBar'
 export default {
-  name: "PlayingList",
+  name: 'PlayingList',
   data: () => ({}),
   components: {
-    SongBar,
+    SongBar
   },
   computed: {
-    showList: sync("myapp/showList"),
+    showList: sync('myapp/showList'),
     ...mapState({
-        playingList: (state) => state.change.playingList
+      playingList: (state) => state.change.playingList
     })
   },
   methods: {
-    handleCancel(e) {
-      this.showList = false;
+    handleCancel (e) {
+      this.showList = false
     },
-    handleShowList(e) {
-      this.showList = !this.showList;
-    },
-  },
-};
+    handleShowList (e) {
+      this.showList = !this.showList
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">

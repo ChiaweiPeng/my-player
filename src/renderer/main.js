@@ -14,6 +14,11 @@ import 'ant-design-vue/dist/antd.css'
 import { Icon } from 'ant-design-vue'
 Vue.use(Antd)
 
+// 挂载插件
+import plugins from '@/plugins'
+// import filters from '@/filters' 
+Vue.use(plugins)
+
 // 引入iconfont 并挂载到全局组件
 const MyIcon = Icon.createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_2430341_g5vc9hh3q8.js'
@@ -22,6 +27,7 @@ Vue.component('MyIcon', MyIcon)
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
+
 Vue.config.productionTip = false
 
 // 去除chrome控制台报错

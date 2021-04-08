@@ -37,14 +37,14 @@ export const startApiServer = () => {
       if (crack < 1 || crack == pair.length - 1) return
       req.cookies[
         decodeURIComponent(pair.slice(0, crack)).trim()
-        ] = decodeURIComponent(pair.slice(crack + 1)).trim()
+      ] = decodeURIComponent(pair.slice(crack + 1)).trim()
     })
     next()
   })
 
   // bodyparser
   app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({extended:false}))
+  app.use(bodyParser.urlencoded({extended: false}))
 
   // fileupload
   app.use(fileUpload())

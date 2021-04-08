@@ -5,8 +5,15 @@
 </template>
 
 <script>
+import {call} from 'vuex-pathify'
 export default {
-  name: 'my-player'
+  name: 'my-player',
+  async mounted(){
+    await this.init()
+  },
+  methods:{
+    init: call('myapp/init')
+  }
 }
 </script>
 

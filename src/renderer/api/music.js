@@ -13,6 +13,7 @@ export const getTrackDetail = async (id, logged = false) => {
   //   const [time, sentence] = i.split(']')
   //   return {time, sentence}
   // })
+  const lyric = await getLyric(id);
   let url
   if (logged) {
     const {data: [song]} = await getSongUrl(id)
@@ -25,5 +26,5 @@ export const getTrackDetail = async (id, logged = false) => {
     url = `https://music.163.com/song/media/outer/url?id=${id}`
   }
   // return {...track, url, lyric}
-  return {...track, url}
+  return {...track, url, lyric}
 }
