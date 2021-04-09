@@ -3,7 +3,7 @@
     <default-navbar :collapsed="collapsed"></default-navbar>
 
     <a-layout
-      :style="collapsed ? 'padding-left: 80px' : 'padding-left :200px'"
+      :style="collapsed ? 'padding-left: 80px' : 'padding-left :250px'"
       style="position: relative; overflow: visible; transition: 0.2s"
     >
       <default-header @tabCollapsed="handleCollapsed"></default-header>
@@ -66,6 +66,7 @@ export default {
   height: 100vh;
   position: fixed;
   z-index: 99;
+  overflow: auto;
 }
 .ant-layout-header {
   position: sticky;

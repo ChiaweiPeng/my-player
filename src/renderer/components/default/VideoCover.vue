@@ -3,11 +3,7 @@
     <router-link :to="`/musicvideo/${video.id}`">
       <div
         class="video-img"
-        :style="`background-image: url('${
-          video.picUrl || video.cover
-            ? video.picUrl || video.cover
-            : defaultCover
-        }')`"
+        :style="`background-image: url('${imgUrl}')`"
       >
         <a-button shape="circle"
           ><my-icon type="icon-bofang"></my-icon
@@ -16,14 +12,15 @@
     </router-link>
 
     <div class="video-info">
-      <p class="video-title">{{ video.name }}</p>
-      <router-link class="video-artist" :to="'/artist/' + video.artistId">{{ video.artistName }}</router-link> · 
-      <span class="video-num">{{ video.playCount }} Views</span>
+      <p class="video-title">{{ video.name || video.title }}</p>
+      <router-link class="video-artist" :to="'/artist/' + video.artistId || video.creator[0].userId">{{ video.artistName || video.creator[0].userName}}</router-link> · 
+      <span class="video-num">{{ count }} Views</span>
     </div>
   </div>
 </template>
 
 <script>
+import {formatNumber} from '@/utils/fn'
 export default {
   name: 'VideoCover',
   data: () => ({
@@ -33,6 +30,20 @@ export default {
     video: Object
   },
   components: {},
+  computed:{
+    imgUrl(){
+      if(this.video.picUrl || this.video.cover){
+        return this.video.picUrl || this.video.cover
+      } else if (this.video.coverUrl) {
+        return this.video.coverUrl
+      } else {
+        return defaultCover
+      }
+    },
+    count(){
+      return formatNumber(this.video.playCount || this.video.playTime)
+    }
+  },
   methods: {
   }
 }

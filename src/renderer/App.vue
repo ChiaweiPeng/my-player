@@ -5,14 +5,18 @@
 </template>
 
 <script>
-import {call} from 'vuex-pathify'
+import {call,get, sync} from 'vuex-pathify'
 export default {
   name: 'my-player',
   async mounted(){
+    this.playing = false
     await this.init()
   },
+  computed:{
+    playing: sync('change/playing')
+  },
   methods:{
-    init: call('myapp/init')
+    init: call('myapp/init'),
   }
 }
 </script>

@@ -26,6 +26,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    type:String,
     limitWidth:Boolean
   },
   components: {},

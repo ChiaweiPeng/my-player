@@ -110,6 +110,7 @@ export default {
       }
 
       this.playingList = list;
+      // console.log(this.playingList);
     },
   },
 };

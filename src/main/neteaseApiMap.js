@@ -5,6 +5,7 @@ const { cookieToJson } = require('NeteaseCloudMusicApi/util/index')
 const artist_list = require('NeteaseCloudMusicApi/module/artist_list')
 const artists = require('NeteaseCloudMusicApi/module/artists')
 const artist_album = require('NeteaseCloudMusicApi/module/artist_album')
+const artist_sublist = require('NeteaseCloudMusicApi/module/artist_sublist')
 
 const lyric = require('NeteaseCloudMusicApi/module/lyric')
 // const login = require('NeteaseCloudMusicApi/module/login') 不知为啥加了单独login会参数错误
@@ -22,6 +23,7 @@ const playlist_detail = require('NeteaseCloudMusicApi/module/playlist_detail')
 
 const album_new = require('NeteaseCloudMusicApi/module/album_new')
 const album = require('NeteaseCloudMusicApi/module/album')
+const album_sublist = require('NeteaseCloudMusicApi/module/album_sublist')
 
 const like = require('NeteaseCloudMusicApi/module/like')
 const likelist = require('NeteaseCloudMusicApi/module/likelist')
@@ -29,6 +31,7 @@ const likelist = require('NeteaseCloudMusicApi/module/likelist')
 const mv_first = require('NeteaseCloudMusicApi/module/mv_first')
 const mv_detail = require('NeteaseCloudMusicApi/module/mv_detail')
 const mv_url = require('NeteaseCloudMusicApi/module/mv_url')
+const mv_sublist = require('NeteaseCloudMusicApi/module/mv_sublist')
 const simi_mv = require('NeteaseCloudMusicApi/module/simi_mv')
 
 const song_detail = require('NeteaseCloudMusicApi/module/song_detail')
@@ -40,10 +43,13 @@ const top_playlist = require('NeteaseCloudMusicApi/module/top_playlist')
 
 const user_playlist = require('NeteaseCloudMusicApi/module/user_playlist')
 
+const recommend_songs = require('NeteaseCloudMusicApi/module/recommend_songs')
+
 module.exports = {
   '/artist_list': generatorFn(artist_list),
   '/artists': generatorFn(artists),
   '/artist/album':generatorFn(artist_album),
+  '/artist/sublist':generatorFn(artist_sublist),
 
   '/lyric': generatorFn(lyric),
   '/like': generatorFn(like),
@@ -62,10 +68,12 @@ module.exports = {
 
   '/album/new': generatorFn(album_new),
   '/album': generatorFn(album),
+  '/albums/sublist': generatorFn(album_sublist),
 
   '/mv/first': generatorFn(mv_first),
   '/mv/detail': generatorFn(mv_detail),
   '/mv/url': generatorFn(mv_url),
+  '/mv/sublist':generatorFn(mv_sublist),
   '/simi/mv': generatorFn(simi_mv),
 
   '/song/detail': generatorFn(song_detail),
@@ -75,7 +83,9 @@ module.exports = {
   '/top/song': generatorFn(topSong),
   '/top/playlist': generatorFn(top_playlist),
 
-  '/user/playlist': generatorFn(user_playlist)
+  '/user/playlist': generatorFn(user_playlist),
+
+  '/recommend/songs': generatorFn(recommend_songs)
 }
 
 function generatorFn (module) {

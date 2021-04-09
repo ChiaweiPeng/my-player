@@ -11,7 +11,7 @@
       <input
         type="text"
         class="global-search"
-        placeholder="Search for songs,artist,albums here"
+        placeholder="输入歌名，歌手或专辑名搜索"
         v-model="searchVal"
         @keyup.enter="hanldeGobalSearch"
       />

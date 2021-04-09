@@ -41,6 +41,7 @@ export default {
         onplay: () => {
           // console.log(src)
           requestAnimationFrame(this.step)
+          this.saveToRecent()
         },
         onseek: () => {
           requestAnimationFrame(this.step)
@@ -103,6 +104,10 @@ export default {
     },
     saveCurrentTime () {
       localStorage.setItem('currentTime', this.currentTime)
+    },
+    saveToRecent(){
+      // 播放过的存到最近播放中
+      this.$store.dispatch('change/pushRecent', this.track.id)
     }
   }
 }

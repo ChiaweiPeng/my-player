@@ -1,3 +1,5 @@
+import { inRange } from "lodash"
+
 export function formatDuring (val) {
   if (val) {
     let min = ~~(val / 1000 / 60)
@@ -8,6 +10,17 @@ export function formatDuring (val) {
   }
 }
 
+export const formatNumber = (number) => {
+  if(inRange(number, 1000,1000000)) {
+    return `${~~(number / 1000)}K`
+  } else if (inRange(number, 1000001,1000000000)) {
+    return `${~~(number / 1000000)}M`
+  } else {
+    return number
+  }
+}
+
 export default {
-  formatDuring
+  formatDuring,
+  formatNumber
 }

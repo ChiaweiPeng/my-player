@@ -2,7 +2,8 @@ import Vue from 'vue'
 import axios from 'axios'
 
 import App from './App'
-import router from './router'
+// import router from './router'
+import {createRouter} from '@/router'
 // import store from './store'
 import {createStore} from './store'
 
@@ -21,7 +22,7 @@ Vue.use(plugins)
 
 // 引入iconfont 并挂载到全局组件
 const MyIcon = Icon.createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/font_2430341_g5vc9hh3q8.js'
+  scriptUrl: '//at.alicdn.com/t/font_2430341_v0vobokfez.js'
 })
 Vue.component('MyIcon', MyIcon)
 
@@ -34,6 +35,7 @@ Vue.config.productionTip = false
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 const store = createStore()
+const router = createRouter(store)
 /* eslint-disable no-new */
 new Vue({
   components: { App },

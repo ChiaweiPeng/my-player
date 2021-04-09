@@ -23,6 +23,5 @@ export default {
   padding: 32px;
   padding-top: 16px;
   padding-bottom: 64px;
-  min-height: 800px;
 }
 </style>

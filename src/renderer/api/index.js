@@ -144,3 +144,8 @@ export const simiMv = mvid => {
 */
 export const getTopPlaylist = (params = {limit: 20, cat: '全部', offset: 0}) =>
   xhr.get('/top/playlist', {params})
+
+/*
+  获取日推
+*/
+export const getDailyRecommend = () => xhr.get('/recommend/songs')

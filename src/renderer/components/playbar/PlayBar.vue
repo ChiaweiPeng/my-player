@@ -58,7 +58,7 @@
             :step="0.01"
           ></a-slider>
         </div>
-        
+
         <playing-list></playing-list>
       </div>
     </div>
@@ -124,6 +124,8 @@ export default {
         ? { icon: 'icon-yinliangxiaoyinliangxiao' }
         : { icon: 'icon-yinliangdayinliangda' }
     }
+  },
+  created(){
   },
   watch: {
     playing (val) {

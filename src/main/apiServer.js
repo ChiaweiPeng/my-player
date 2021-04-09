@@ -53,7 +53,7 @@ export const startApiServer = () => {
   app.use(cache('2 minutes', (req, res) => res.statusCode === 200))
 
   // netease 路由匹配
-  // http://127.0.0.1:6001/api/artist-list
+  // http://127.0.0.1:6001/api/artist_list
   Object.entries(netApiMap).map(([k, v]) => {
     app.use(k, v)
   })

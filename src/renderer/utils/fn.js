@@ -80,4 +80,4 @@ export const formatLyric = (lyric = '') => {
 //     });
 // };
 
-export { formatDuring } from './filters'
+export { formatDuring,formatNumber } from './filters'
