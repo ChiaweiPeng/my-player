@@ -24,7 +24,7 @@ const state = {
   mode: PLAY_MODE.CYCLE,
   volume: 0.8,
   likes: [],
-  recent: localStorage.getItem('recent') ? JSON.parse(localStorage.getItem('recent')) : []
+  recent: localStorage.getItem('recent') ? JSON.parse(localStorage.getItem('recent')) : [],
 }
 
 export default {

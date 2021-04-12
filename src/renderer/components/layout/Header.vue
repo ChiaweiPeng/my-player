@@ -12,7 +12,7 @@
         type="text"
         class="global-search"
         placeholder="输入歌名，歌手或专辑名搜索"
-        v-model="searchVal"
+        v-model="keywords"
         @keyup.enter="hanldeGobalSearch"
       />
     </span>
@@ -24,7 +24,7 @@ export default {
   name: 'DefaultHeader',
   data: () => ({
     collapsed: false,
-    searchVal: ''
+    keywords: ''
   }),
   props: {},
   components: {},
@@ -35,7 +35,14 @@ export default {
     },
 
     hanldeGobalSearch (e) {
-      console.log(this.searchVal)
+      console.log(this.keywords)
+      const {name, params} = this.$route
+      if(!this.keywords) return
+      if(name === 'search' && params.keywords === this.keywords) return
+      this.$router.push({
+        name:'search',
+        params:{ keywords: this.keywords}
+      })
     }
   }
 }

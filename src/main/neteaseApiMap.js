@@ -7,6 +7,8 @@ const artists = require('NeteaseCloudMusicApi/module/artists')
 const artist_album = require('NeteaseCloudMusicApi/module/artist_album')
 const artist_sublist = require('NeteaseCloudMusicApi/module/artist_sublist')
 
+const cloudsearch = require('NeteaseCloudMusicApi/module/cloudsearch')
+
 const lyric = require('NeteaseCloudMusicApi/module/lyric')
 // const login = require('NeteaseCloudMusicApi/module/login') 不知为啥加了单独login会参数错误
 const login_cellphone = require('NeteaseCloudMusicApi/module/login_cellphone')
@@ -50,6 +52,8 @@ module.exports = {
   '/artists': generatorFn(artists),
   '/artist/album':generatorFn(artist_album),
   '/artist/sublist':generatorFn(artist_sublist),
+
+  '/cloudsearch': generatorFn(cloudsearch),
 
   '/lyric': generatorFn(lyric),
   '/like': generatorFn(like),

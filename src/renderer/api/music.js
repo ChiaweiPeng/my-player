@@ -1,4 +1,5 @@
 import {getLyric, getSongData, getSongUrl } from '@/api/index'
+import {musicXhr as xhr} from '@/utils/xhr'
 
 /**
  * 获取歌曲详情，包括歌词，可供播放的url
@@ -27,4 +28,17 @@ export const getTrackDetail = async (id, logged = false) => {
   }
   // return {...track, url, lyric}
   return {...track, url, lyric}
+}
+
+
+/* 
+  搜索
+*/
+export const search = async (keywords, conditions) => {
+  return xhr.get('/cloudsearch', {
+    params:{
+      keywords,
+      ...conditions
+    }
+  })
 }

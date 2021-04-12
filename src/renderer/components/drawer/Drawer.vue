@@ -1,121 +1,146 @@
 <template>
-  <div class="lyric-page">
-    <div class="drawer-header">
-      <a-button ghost @click="showLyricPage = !showLyricPage"
-        ><div class="tiao"></div
-      ></a-button>
-    </div>
+  <a-drawer
+    placement="bottom"
+    height="100%"
+    :closable="false"
+    :visible="showLyricPage"
+    @close="drawerClose"
+    :drawer-style="backgroundBG"
+  >
+    <div class="lyric-page">
+      <div class="drawer-header">
+        <a-button ghost @click="showLyricPage = !showLyricPage"
+          ><div class="tiao"></div
+        ></a-button>
+      </div>
 
-    <div class="drawer-content">
-      <div class="left">
-        <div class="song-img">
-          <a-avatar
-            :size="400"
-            :src="track.al.picUrl"
-            shape="square"
-          ></a-avatar>
+      <div class="drawer-content">
+        <div class="left">
+          <div class="song-img">
+            <a-avatar
+              :size="400"
+              :src="track.al.picUrl"
+              shape="square"
+            ></a-avatar>
 
-          <div class="song-info">
-            <div class="info">
-              <p class="name">{{ track.name }}</p>
-              <router-link :to="`/artist/${track.ar[0].id}`">
-                  <a-button class="artist" type="link" @click="showLyricPage = !showLyricPage">{{ track.ar[0].name }}</a-button>
-              </router-link>
+            <div class="song-info">
+              <div class="info">
+                <p class="name">{{ track.name }}</p>
+                <router-link :to="`/artist/${track.ar[0].id}`">
+                  <a-button
+                    class="artist"
+                    type="link"
+                    @click="showLyricPage = !showLyricPage"
+                    >{{ track.ar[0].name }}</a-button
+                  >
+                </router-link>
+              </div>
+
+              <div class="like">
+                <router-link :to="`/album/${$ochain(track, 'al', 'id')}`">
+                  <a-button
+                    shape="circle"
+                    @click="showLyricPage = !showLyricPage"
+                    ><a-icon type="ellipsis" />
+                  </a-button>
+                </router-link>
+              </div>
+            </div>
+          </div>
+
+          <div class="playbar-control">
+            <a-slider
+              @afterChange="onAfterPlaybarChange"
+              v-model="currentTime"
+              :max="~~(track.dt / 1000)"
+              :min="0"
+              :tipFormatter="null"
+            ></a-slider>
+
+            <div class="time">
+              <span>{{ formatCurrentTime(currentTime) }}</span>
+              <span>{{ formatTime(track.dt) }}</span>
             </div>
 
-            <div class="like">
-              <router-link :to="`/album/${$ochain(track, 'al' ,'id')}`">
-                <a-button shape="circle" @click="showLyricPage = !showLyricPage"
-                  ><a-icon type="ellipsis" />
-                </a-button>
-              </router-link>
+            <div class="btn-area">
+              <a-button shape="circle" size="large" @click="handleClickLike"
+                ><a-icon
+                  type="heart"
+                  theme="filled"
+                  :style="{
+                    fontSize: '1.2rem',
+                    color: `${liked ? '#1890ff' : 'rgba(0, 0, 0, 0.65)'}`,
+                  }"
+              /></a-button>
+              <a-button
+                shape="circle"
+                size="large"
+                @click="handleClickBackMusic"
+                ><a-icon
+                  type="step-backward"
+                  theme="filled"
+                  :style="{ fontSize: '2rem' }"
+              /></a-button>
+              <a-button
+                shape="circle"
+                size="large"
+                @click="handleClickStartPlay"
+                ><a-icon
+                  :type="playingState.icon"
+                  theme="filled"
+                  :style="{ fontSize: '2.6rem' }"
+              /></a-button>
+              <a-button
+                shape="circle"
+                size="large"
+                @click="handleClickForwardMuisc"
+                ><a-icon
+                  type="step-forward"
+                  theme="filled"
+                  :style="{ fontSize: '2rem' }"
+              /></a-button>
+              <a-button shape="circle" size="large" @click="handleClickTabMode">
+                <my-icon class="p-mode" :type="orderIconState.icon"></my-icon>
+              </a-button>
+            </div>
+
+            <div class="volume-area">
+              <span>
+                <my-icon
+                  class="p-vol"
+                  type="icon-yinliangxiaoyinliangxiao"
+                ></my-icon>
+              </span>
+
+              <div class="volume-track">
+                <a-slider v-model="volume" :max="1" :step="0.01"></a-slider>
+              </div>
+
+              <span>
+                <my-icon
+                  class="p-vol"
+                  type="icon-yinliangdayinliangda"
+                ></my-icon>
+              </span>
             </div>
           </div>
         </div>
-
-        <div class="playbar-control">
-          <a-slider
-            @afterChange="onAfterPlaybarChange"
-            v-model="currentTime"
-            :max="~~(track.dt / 1000)"
-            :min="0"
-            :tipFormatter="null"
-          ></a-slider>
-
-          <div class="time">
-            <span>{{ formatCurrentTime(currentTime) }}</span>
-            <span>{{ formatTime(track.dt) }}</span>
-          </div>
-
-          <div class="btn-area">
-            <a-button shape="circle" size="large" @click="handleClickLike"
-              ><a-icon
-                type="heart"
-                theme="filled"
-                :style="{
-                  fontSize: '1.2rem',
-                  color: `${liked ? '#1890ff' : 'rgba(0, 0, 0, 0.65)'}`,
-                }"
-            /></a-button>
-            <a-button shape="circle" size="large" @click="handleClickBackMusic"
-              ><a-icon
-                type="step-backward"
-                theme="filled"
-                :style="{ fontSize: '2rem' }"
-            /></a-button>
-            <a-button shape="circle" size="large" @click="handleClickStartPlay"
-              ><a-icon
-                :type="playingState.icon"
-                theme="filled"
-                :style="{ fontSize: '2.6rem' }"
-            /></a-button>
-            <a-button
-              shape="circle"
-              size="large"
-              @click="handleClickForwardMuisc"
-              ><a-icon
-                type="step-forward"
-                theme="filled"
-                :style="{ fontSize: '2rem' }"
-            /></a-button>
-            <a-button shape="circle" size="large" @click="handleClickTabMode">
-              <my-icon class="p-mode" :type="orderIconState.icon"></my-icon>
-            </a-button>
-          </div>
-
-          <div class="volume-area">
-            <span>
-              <my-icon
-                class="p-vol"
-                type="icon-yinliangxiaoyinliangxiao"
-              ></my-icon>
-            </span>
-
-            <div class="volume-track">
-              <a-slider v-model="volume" :max="1" :step="0.01"></a-slider>
-            </div>
-
-            <span>
-              <my-icon class="p-vol" type="icon-yinliangdayinliangda"></my-icon>
-            </span>
+        <div class="right">
+          <div class="lyric-container" ref="lyricContainer">
+            <ul v-if="lyric.length">
+              <li
+                v-for="(item, index) of lyric"
+                :key="index"
+                :class="{ active: index === activeIdx }"
+              >
+                {{ item.sentence }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="right">
-        <div class="lyric-container" ref="lyricContainer">
-          <ul v-if="lyric.length">
-            <li
-              v-for="(item, index) of lyric"
-              :key="index"
-              :class="{ active: index === activeIdx }"
-            >
-              {{ item.sentence }}
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
+  </a-drawer>
 </template>
 
 <script>
@@ -123,10 +148,8 @@ import { sync, get, dispatch, commit } from "vuex-pathify";
 import { formatDuring, formatLyric } from "@/utils/fn";
 import { findIndex } from "lodash";
 import { mapGetters } from "vuex";
-import Player from "@/components/playbar/Player";
 export default {
-  name: "DrawerContent",
-  extends: Player,
+  name: "DefaultDrawer",
   data: () => ({
     activeIdx: -1,
     interval: null,
@@ -142,7 +165,6 @@ export default {
     currentTime: sync("change/currentTime"),
     mode: sync("change/mode"),
     volume: sync("change/volume"),
-    seek: sync("change/seek"),
     ...mapGetters({
       next: "change/nextTrackId",
       prev: "change/prevTrackId",
@@ -175,6 +197,14 @@ export default {
         return lyric;
       }
     },
+    backgroundBG() {
+      return {
+        backgroundImage: "url(" + this.track.al.picUrl + ")",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+      };
+    },
   },
   watch: {
     showLyricPage(val) {
@@ -199,7 +229,7 @@ export default {
       return formatDuring(val);
     },
     onAfterPlaybarChange(val) {
-      this.setSeek(val);
+      // 歌词页为什么不能用seek拖动了
     },
     handleClickLike() {
       dispatch("change/favSong", {
@@ -247,12 +277,43 @@ export default {
         }
       });
     },
+    drawerClose() {
+      this.showLyricPage = !this.showLyricPage;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 @import "@/scss/common";
+.ant-btn {
+  background-color: transparent;
+}
+
+.ant-drawer :global(.ant-drawer-wrapper-body) {
+  // background-color:red;
+  position: relative;
+  z-index: 1;
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: inherit;
+    filter: blur(10px);
+    z-index: 2;
+  }
+}
+
+.ant-drawer :global(.ant-drawer-body) {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
 .drawer-header {
   text-align: center;
   margin-bottom: 20px;
@@ -279,18 +340,28 @@ export default {
       margin: 20px 0;
       display: flex;
       justify-content: space-between;
+      color: #999;
       .info > p {
         font-weight: 600;
         font-size: 1rem;
         margin-bottom: 5px;
-        color: $main-text-color;
+        color: #999;
+        cursor: default;
+        &:hover {
+          color: $theme-color;
+          transition: 1s;
+        }
       }
-      .artist{
+      .artist {
         padding: 0;
-        color: $main-text-color;
+        color: #999;
         font-weight: 600;
         font-size: 1rem;
-        border: none
+        border: none;
+        &:hover {
+          color: $theme-color;
+          transition: 1s;
+        }
       }
     }
 
@@ -358,6 +429,7 @@ export default {
         font-weight: 600;
         margin-bottom: 10px;
         line-height: 2.5rem;
+        color: #999;
 
         &.active {
           color: $theme-color;

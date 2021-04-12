@@ -96,7 +96,7 @@ export default {
     showLyricPage: sync('myapp/showLyricPage'),
     seek: sync('change/seek'),
     ...mapGetters({
-      next: 'change/nextTrackId',
+      next: 'change/nextTrackId', 
       prev: 'change/prevTrackId',
       liked: 'change/liked'
     }),

@@ -67,7 +67,14 @@ const musicRoutes = [{
   component: () => import('../view/Artist'),
   props: true,
   meta: { keepAlive: true }
-}
+},
+{
+  path: '/search/:keywords?',
+  name: 'search',
+  component: () => import('../view/search/Search'),
+  props: true,
+  meta: { keepAlive: true }
+},
 ]
 // 去除重复点击报错
 const originalPush  = Router.prototype.push

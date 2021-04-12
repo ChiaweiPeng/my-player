@@ -21,12 +21,20 @@
             </router-link>
           </p>
 
-          <p>
+          <p v-if="type === 'album'">
             更新时间：
             {{
-              $dayjs(list.updateTime || list.publishTime).format("YYYY-MM-DD")
+              $dayjs(list.publishTime).format("YYYY-MM-DD")
             }}
             · {{ list.size }} 首歌曲
+          </p>
+
+          <p v-if="type === 'playlist'">
+            更新时间：
+            {{
+              $dayjs(list.updateTime).format("YYYY-MM-DD")
+            }}
+            · {{ count }} 次播放
           </p>
         </div>
         <p class="playlist-info">{{ list.description }}</p>
@@ -52,6 +60,7 @@ import { getPlayList, getAlbum } from "@/api";
 import AlbumCover from "@/components/default/AlbumCover";
 import SongBar from "@/components/default/SongBar";
 import { dispatch } from "vuex-pathify";
+import {formatNumber} from "@/utils/fn"
 export default {
   name: "List",
   data: () => ({
@@ -88,6 +97,11 @@ export default {
   mounted() {},
   computed: {
     service: (vm) => (vm.type === "album" ? getAlbum : getPlayList),
+    count(){
+      if(this.list.playCount){
+        return formatNumber(this.list.playCount)
+      }
+    }
   },
   methods: {
     async fetch() {
