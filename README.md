@@ -9,7 +9,7 @@
 - 📜 歌词，日推
 - 🌗 适配夜间模式
 - 📦 electron 打包
-- 🏗 Work In Progress...
+- 🏗 Work In Progress...正在探索怎么结合qq音乐api
 
 ### 安装
 ```
@@ -37,8 +37,10 @@ yarn run electron:build
 ![沉浸页](doc/lyric.png)
 
 ### 特别感谢
-https://github.com/Binaryify/NeteaseCloudMusicApi
-https://github.com/GuMengYu/v-player
-两位大佬的作品，顶礼膜拜
+[Binaryify](https://github.com/Binaryify/NeteaseCloudMusicApi)
+
+[GuMengYu](https://github.com/GuMengYu/v-player)
+两位大佬的作品，顶礼膜拜，万分感谢
+如有冒犯请与小弟联系
 
 ### 仅供个人学习交流使用
