@@ -1,25 +1,44 @@
 # my-player
 
-> An electron-vue project
+### 个人毕设烂大街播放器项目
+#### 开发基于Vue全家桶 + [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) + Electron-vue 套壳 + Ant Design of Vue 
 
-#### Build Setup
+## 已有功能
+- 🥲 简约单纯的播放器，没有网抑云功能
+- 📱 目前只支持手机登录
+- 📜 歌词，日推
+- 🌗 适配夜间模式
+- 📦 electron 打包
+- 🏗 Work In Progress...
 
-``` bash
-# install dependencies
+### 安装
+```
+yarn install
+or 
 npm install
-
-# serve with hot reload at localhost:9080
-npm run dev
-
-# build electron application for production
-npm run build
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
-
 ```
 
----
+### 启动
+```
+yarn run dev
+```
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[45a3e22](https://github.com/SimulatedGREG/electron-vue/tree/45a3e224e7bb8fc71909021ccfdcfec0f461f634) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+### 打包
+```
+yarn run electron:build
+```
+
+### 预览效果
+![发现歌曲](doc/main.png)
+![收藏](doc/collection.png)
+![探索](doc/explore.png)
+![日推](doc/daily.png)
+![歌手](doc/singer.png)
+![沉浸页](doc/lyric.png)
+
+### 特别感谢
+https://github.com/Binaryify/NeteaseCloudMusicApi
+https://github.com/GuMengYu/v-player
+两位大佬的作品，顶礼膜拜
+
+### 仅供个人学习交流使用
