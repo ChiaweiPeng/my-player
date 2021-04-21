@@ -214,6 +214,7 @@ export default {
 @import "@/scss/common";
 .main-title {
   font-weight: 600;
+  color:$main-text-color ;
 }
 
 .header {

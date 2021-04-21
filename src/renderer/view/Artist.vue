@@ -203,6 +203,7 @@ export default {
     font-size: 1.6rem;
     margin-top: 20px;
     font-weight: 700;
+    color: $main-text-color;
   }
   .artist-info {
     width: 80%;

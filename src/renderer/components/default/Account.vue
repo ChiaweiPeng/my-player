@@ -63,6 +63,7 @@ export default {
 .ant-btn.sign {
   margin-top: 4px;
   margin-left: 2px;
+  background: transparent;
   span {
     margin-left: 0;
   }
@@ -73,7 +74,7 @@ export default {
 
 .out-name{
   font-weight: 600;
-  color: #333;
+  color: var(--color-gray-650);
   margin-left: 10px;
 }
 </style>

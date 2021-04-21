@@ -9,15 +9,15 @@
       >
         <div class="btn-tab">
           <a-button shape="circle" size="small" @click="$router.go(-1)">
-            <my-icon type="icon-calendar-arrow-left" />
+            <my-icon type="icon-calendar-arrow-left" :style="`${nightMode ? 'color:#999' : 'color:#333'}`"/>
           </a-button>
           <a-button shape="circle" size="small" @click="$router.go(1)">
-            <my-icon type="icon-calendar-arrow-right" />
+            <my-icon type="icon-calendar-arrow-right" :style="`${nightMode ? 'color:#999' : 'color:#333'}`"/>
           </a-button>
           <a-button shape="circle" size="small" @click="handleReload">
             <my-icon
               type="icon-reload"
-              style="fontsize: 1rem; fontwight: 700"
+              :style="`fontsize: 1rem; fontwight: 700;${nightMode ? 'color:#999' : 'color:#333'}`"
             />
           </a-button>
         </div>
@@ -33,7 +33,7 @@
 
         <div class="setting">
           <a-button shape="circle" size="small" title="setting">
-            <my-icon type="icon-setting-Fill"></my-icon>
+            <my-icon type="icon-setting-Fill"  :style="`${nightMode ? 'color:#999' : 'color:#333'}`"></my-icon>
           </a-button>
 
           <a-button
@@ -42,8 +42,8 @@
             @click="handleTabNight"
             title="tabDayMode"
           >
-            <my-icon type="icon-yejian" v-if="!isNight"></my-icon>
-            <my-icon type="icon-taiyang1" v-else></my-icon>
+            <my-icon type="icon-yejian" v-if="!nightMode"></my-icon>
+            <my-icon type="icon-taiyang1"  style="color:#999" v-else></my-icon>
           </a-button>
         </div>
       </a-menu-item>
@@ -115,7 +115,6 @@ import { sync } from "vuex-pathify";
 export default {
   name: "DefaultNavbar",
   data: () => ({
-    isNight: false,
     current: 0,
     defaultNav1: {
       nav_title: "音乐",
@@ -179,13 +178,20 @@ export default {
   computed: {
     logged: (vm) => vm.$store.getters["settings/logged"],
     playlist: sync("change/playlist"),
+    nightMode:sync('myapp/nightMode')
   },
   created() {
     this.nav();
   },
   methods: {
     handleTabNight(e) {
-      this.isNight = !this.isNight;
+      this.nightMode = !this.nightMode
+      const body = document.querySelector('body')
+      if(this.nightMode){
+        body.setAttribute('class','nightmode')
+      } else{
+        body.removeAttribute('class','nightmode')
+      }
     },
     handleTabContent(key, link) {
       this.current = key;
@@ -215,9 +221,17 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/global";
 @import "@/scss/common";
+
+.ant-btn{
+  background:var(--color-gray-100);
+  &:hover{
+    background-color:var(--color-gray-150) !important;
+  }
+}
 .ant-menu {
   border-right: none;
   padding-bottom: 80px;
+  background: var(--color-gray-100);
   .ant-btn {
     border-color: transparent;
     .anticon {
@@ -257,6 +271,7 @@ export default {
 
     .ant-menu-item-selected,
     .ant-menu-item-active {
+      background: var(--color-blue-200);
       .item-name {
         color: $theme-color;
       }
@@ -282,13 +297,14 @@ export default {
 }
 .ant-menu-submenu :global(.ant-menu-item) {
   padding-left: 30px !important;
+  background: var(--color-gray-100);
+  margin-bottom: 0 !important;
   a {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   &:hover {
-    background-color: #e6f7ff;
+    background-color: var(--color-blue-200)
   }
 }
 </style>

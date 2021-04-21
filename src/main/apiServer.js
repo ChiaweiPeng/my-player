@@ -60,6 +60,7 @@ export const startApiServer = () => {
 
   // qq-music 路由匹配
   // http://127.0.0.1:6001/qq-api/api/singer_list
+  //http://localhost:6001/qq-api/api/search_by_key?key=
   app.use('/qq-api', musicApi.router('/api'))
 
   // 配置端口，主机号

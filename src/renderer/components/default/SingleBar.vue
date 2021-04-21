@@ -1,5 +1,5 @@
 <template>
-  <div class="singlebar" @click="handleSelect(song.id)">
+  <div class="singlebar" @click="handleSelect(song.id)" :style="`${nightMode? 'color:#999': 'color:'}`">
     <div class="song-img">
       <a-button class="cover"><a-icon type="caret-right" /></a-button>
       <a-avatar shape="square" :src="song.al.picUrl" :size="45"></a-avatar>
@@ -18,6 +18,7 @@
 
 <script>
 import { formatDuring } from "@/utils/fn";
+import {sync} from 'vuex-pathify'
 export default {
   name: "SingleBar",
   data: () => ({}),
@@ -30,6 +31,9 @@ export default {
     limitWidth:Boolean
   },
   components: {},
+  computed:{
+    nightMode:sync('myapp/nightMode')
+  },
   methods: {
     formatTime(val) {
       return formatDuring(val);
@@ -59,8 +63,8 @@ export default {
         i {
           display: none;
           font-size: 20px;
-          margin-left: 8px;
-          margin-top: 4px;
+          margin-left: 5px;
+          margin-top: 3px;
         }
         &:hover i {
           display: block;

@@ -75,6 +75,13 @@ const musicRoutes = [{
   props: true,
   meta: { keepAlive: true }
 },
+// {
+//   path: '/qqsearch/:keywords?',
+//   name: 'qqsearch',
+//   component: () => import('../view/search/QQSearch'),
+//   props: true,
+//   meta: { keepAlive: true }
+// }
 ]
 // 去除重复点击报错
 const originalPush  = Router.prototype.push

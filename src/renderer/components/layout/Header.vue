@@ -7,15 +7,19 @@
     />
 
     <span class="search-input">
-      <my-icon type="icon-sousuo" class="s-icon" @click="hanldeGobalSearch"></my-icon>
+      <my-icon type="icon-sousuo" class="s-icon" @click="handleGlobalSearch"></my-icon>
       <input
         type="text"
         class="global-search"
         placeholder="输入歌名，歌手或专辑名搜索"
         v-model="keywords"
-        @keyup.enter="hanldeGobalSearch"
+        @keyup.enter="handleGlobalSearch"
       />
     </span>
+
+    <!-- <span>
+      <a-input-search v-model="QQKeywords" placeholder="input search text" enter-button @search="onSearch" />  
+    </span> -->
   </a-layout-header>
 </template>
 
@@ -24,7 +28,8 @@ export default {
   name: 'DefaultHeader',
   data: () => ({
     collapsed: false,
-    keywords: ''
+    keywords: '',
+    // QQKeywords:''
   }),
   props: {},
   components: {},
@@ -34,7 +39,7 @@ export default {
       this.$emit('tabCollapsed', this.collapsed)
     },
 
-    hanldeGobalSearch (e) {
+    handleGlobalSearch (e) {
       console.log(this.keywords)
       const {name, params} = this.$route
       if(!this.keywords) return
@@ -43,7 +48,17 @@ export default {
         name:'search',
         params:{ keywords: this.keywords}
       })
-    }
+    },
+    // onSearch(){
+    //   console.log(this.QQKeywords)
+    //   const {name, params} = this.$route
+    //   if(!this.QQKeywords) return
+    //   if(name === 'qqsearch' && params.QQKeywords === this.QQKeywords) return
+    //   this.$router.push({
+    //     name:'qqsearch',
+    //     params:{ QQKeywords: this.QQKeywords}
+    //   })
+    // }
   }
 }
 </script>
@@ -72,7 +87,9 @@ export default {
     .global-search {
       height: 30px;
       min-width: 18vw;
-      @include my-input
+      @include my-input;
+      background: var(--color-gray-100);
+      color: $main-text-color;
       // border: 1px solid transparent;
       // text-indent: 27px;
       // &:focus {
@@ -89,7 +106,7 @@ export default {
   line-height: 64px;
   cursor: pointer;
   transition: color 0.3s;
-
+  color: #999;
   &:hover {
     color: #1890ff;
   }

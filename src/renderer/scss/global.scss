@@ -7,8 +7,10 @@
 // 全局颜色
 $theme-color : #1890ff;
 $theme-lighten-color : #e6f7ff;
-$main-text-color:rgba(0, 0, 0, 0.87);
+// $main-text-color:rgba(0, 0, 0, 0.87);
+$main-text-color:var(--color-gray-950);
 
 // 侧边栏颜色
-$slider-title-fontcolor:rgba(0, 0, 0, 0.6);
+// $slider-title-fontcolor:rgba(0, 0, 0, 0.6);
+$slider-title-fontcolor:var(--color-gray-900);
 $slider-item-fontcolor:$main-text-color;

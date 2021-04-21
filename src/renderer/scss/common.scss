@@ -2,8 +2,7 @@
 
 // 轻主题背景颜色
 @mixin theme--light-app {
-    background: #fff;
-    color:rgba(0, 0, 0, 0.87) ;
+    color:$main-text-color ;
 }
 
 @mixin content-text-h6 {

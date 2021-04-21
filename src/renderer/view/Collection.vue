@@ -28,7 +28,7 @@
           </a-row>
         </a-tab-pane>
 
-        <a-tab-pane key="1" tab="专辑">
+        <a-tab-pane key="1" tab="专辑" :tabBarStyle="`${nightMode ? 'color:#999' : 'color:#333'}`">
           <a-row :gutter="[30, 30]">
             <a-col :span="4" v-for="al of albums" :key="al.id">
               <album-cover :data="al" :type="'album'"></album-cover>
@@ -82,6 +82,7 @@ export default {
   computed: {
     playlist: sync("change/playlist"),
     recentIds: get("change/recent"),
+    nightMode:sync('myapp/nightMode'),
     type() {
       return {
         0: "playlists",
@@ -143,7 +144,7 @@ export default {
     .ant-col {
       border-radius: 5px;
       &:hover {
-        background-color: $theme-lighten-color;
+        background-color: var(--color-blue-200);
       }
     }
   }
@@ -157,4 +158,11 @@ export default {
       }
     }
   }
+
+.tab-container :global(.ant-tabs-tab){
+  width: 150px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-gray-850);
+}
 </style>

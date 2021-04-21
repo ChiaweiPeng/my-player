@@ -70,14 +70,12 @@ export default {
       return {
         album: getAlbum,
         playlist: getPlayList,
-        artist: getArtist,
       }[this.type];
     },
     to() {
       return {
         album: `/album/${this.data.id}`,
         playlist: `/playlist/${this.data.id}`,
-        artist: `/artist/${this.data.id}`,
       }[this.type];
     },
     showList: sync("myapp/showList"),

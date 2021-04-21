@@ -4,6 +4,7 @@ const state = {
   showLogin: false,
   showList: false,
   showLyricPage:false,
+  nightMode:false
 }
 
 const mutations = make.mutations(state)

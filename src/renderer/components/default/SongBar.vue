@@ -44,12 +44,13 @@ export default {
   border-right: none;
   // max-height: 70vh;
   overflow-x: hidden !important;
+  background: var(--color-gray-100) !important;
   .ant-menu-item {
     height: auto !important;
     padding: 5px 10px !important;
     width: 100% !important;
     &:hover {
-      background-color: $theme-lighten-color;
+      background-color: var(--color-blue-200);
     }
   }
 }

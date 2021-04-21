@@ -48,7 +48,7 @@
       </div>
       <div class="playbar-right">
         <a-button shape="circle" size="large" @click="handleVolume">
-          <my-icon class="p-vol" :type="volumeIcon.icon"></my-icon>
+          <my-icon class="p-vol" :type="volumeIcon.icon" :style="`${nightMode ? 'color:#999' : 'color:#333'}`"></my-icon>
         </a-button>
         <div class="volume-track">
           <a-slider
@@ -95,6 +95,7 @@ export default {
     showList: sync('myapp/showList'),
     showLyricPage: sync('myapp/showLyricPage'),
     seek: sync('change/seek'),
+    nightMode:sync('myapp/nightMode'),
     ...mapGetters({
       next: 'change/nextTrackId', 
       prev: 'change/prevTrackId',
@@ -197,6 +198,13 @@ export default {
 .ant-slider {
   margin: 0;
   padding: 0;
+}
+
+.ant-btn{
+  background:var(--color-gray-100);
+  &:hover{
+    background-color:var(--color-gray-150) !important;
+  }
 }
 
 .ant-layout-footer {

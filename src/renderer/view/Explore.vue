@@ -23,7 +23,7 @@
     <div class="moon">
       <div class="header">
         <div class="title">
-          <p class="light-title">moon</p>
+          <p class="light-title">moods</p>
           <p class="main-title">新专辑和流派</p>
         </div>
 
@@ -148,7 +148,7 @@ export default {
       font-size: 0.8rem;
       font-weight: 700;
       margin-bottom: 0.6rem;
-      color:rgba(0, 0, 0, 0.7)
+      color:var(--color-gray-650)
     }
   }
 }
