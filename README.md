@@ -35,11 +35,13 @@ yarn run electron:build
 ![日推](doc/daily.png)
 ![歌手](doc/singer.png)
 ![沉浸页](doc/lyric.png)
+![mv](doc/mv.png)
 
 ### 特别感谢
 [Binaryify](https://github.com/Binaryify/NeteaseCloudMusicApi)
 
 [GuMengYu](https://github.com/GuMengYu/v-player)
+
 两位大佬的作品，顶礼膜拜，万分感谢
 如有冒犯请与小弟联系
 
