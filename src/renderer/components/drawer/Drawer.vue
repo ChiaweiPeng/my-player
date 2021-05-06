@@ -136,6 +136,11 @@
                 {{ item.sentence }}
               </li>
             </ul>
+
+            <ul v-else>
+              <li>这是一首纯音乐</li>
+              <li>请用心聆听</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -181,8 +186,11 @@ export default {
       ][this.mode];
     },
     lyric() {
+      if(this.track.lyric.nolyric){
+        console.log('this is nolyric')
+        return false
+      }
       const { tlyric, lrc } = this.track.lyric;
-      // console.log(formatLyric(lrc.lyric))
       let lyric = lrc.lyric ? formatLyric(lrc.lyric) : [];
       let _tlyric = tlyric.lyric ? formatLyric(tlyric.lyric) : [];
       if (_tlyric.length) {
@@ -260,12 +268,15 @@ export default {
     caculate() {
       const current = this.currentTime;
       const prevActiveIdx = this.activeIdx;
+      // 找到当前播放的歌词句
       const activeIdx = findIndex(this.lyric, (o, idx) => {
         const next = this.lyric[idx + 1];
+        // 定时器每500ms执行，找满足 播放时间crt<下一句出现时间时间，并大于当前该句的出现时间
+        // o.time 为当前句的出现时间
         return (next ? current < next.time : true) && current >= o.time;
       });
       this.activeIdx = activeIdx;
-      // 当前歌词渲染后计算出滚动位置
+      // 当前歌词渲染后计算出滚动位置，添加高亮样式并滚动父元素
       this.$nextTick(async () => {
         if (activeIdx >= 0 && prevActiveIdx !== activeIdx) {
           const container = this.$refs.lyricContainer;

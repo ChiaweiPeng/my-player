@@ -22,6 +22,8 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
+    // 更改软件icon图标
+    icon:require('path').join(__dirname, 'icon.ico'),
     height: 563,
     useContentSize: true,
     width: 1000

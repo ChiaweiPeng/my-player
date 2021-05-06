@@ -15,7 +15,7 @@
                 <div class="btn-area">
                   <a-button class="btn-play" shape="round" @click="clickNewRelease(release)">
                     <my-icon type="icon-bofang"></my-icon>
-                    NOW PLAYING</a-button
+                    立即播放</a-button
                   >
                   <a-button class="btn-like" shape="circle" @click="clickLikeNew(release)"
                     >
@@ -163,7 +163,7 @@ export default {
               }
             }
             .btn-play {
-              padding-right: 10px;
+              padding-right: 15px;
               .anticon {
                 margin-left: 5px;
                 line-height: 0;

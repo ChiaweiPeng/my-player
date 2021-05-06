@@ -32,9 +32,9 @@
         <default-account :collapsed="collapsed"></default-account>
 
         <div class="setting">
-          <a-button shape="circle" size="small" title="setting">
+          <!-- <a-button shape="circle" size="small" title="setting">
             <my-icon type="icon-setting-Fill"  :style="`${nightMode ? 'color:#999' : 'color:#333'}`"></my-icon>
-          </a-button>
+          </a-button> -->
 
           <a-button
             shape="circle"
@@ -131,7 +131,7 @@ export default {
           to: "/explore",
           icon: "icon-song-circle",
         },
-        { name: "私人FM", val: "fm", to: "/fm", icon: "icon-music-node" },
+        // { name: "私人FM", val: "fm", to: "/fm", icon: "icon-music-node" },
         {
           name: "每日推荐",
           val: "daily",

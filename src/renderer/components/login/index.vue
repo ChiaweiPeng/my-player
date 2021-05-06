@@ -20,7 +20,7 @@
 
     <div class="btn-area">
       <a-button type="primary" :loading="loading" @click="login"
-        >Login</a-button
+        >登录</a-button
       >
     </div>
   </a-modal>

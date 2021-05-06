@@ -57,6 +57,7 @@ export default {
 .video-info {
   font-size: 0.78rem;
   font-weight: 600;
+  color: var(--color-gray-950);
   .video-title {
     @include box-title;
   }
